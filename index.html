@@ -13,20 +13,57 @@
             margin: 0;
             padding: 0;
         }
+        #locationButton {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            padding: 10px 20px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        #locationButton:hover {
+            background-color: #357abd;
+        }
     </style>
 </head>
 <body>
+    <button id="locationButton">顯示我的位置</button>
     <div id="map"></div>
 
-    <script src="config.js"></script>
     <script>
+        // Get API key from environment or config file
+        const getApiKey = () => {
+            // Check if we're in production (Netlify)
+            if (window.GOOGLE_MAPS_API_KEY) {
+                return window.GOOGLE_MAPS_API_KEY;
+            }
+            // Fallback to local config
+            if (typeof config !== 'undefined' && config.GOOGLE_MAPS_API_KEY) {
+                return config.GOOGLE_MAPS_API_KEY;
+            }
+            console.error('No API key found');
+            return '';
+        };
+
+        let map;
         function initMap() {
-            const map = new google.maps.Map(document.getElementById('map'), {
+            map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 15,
                 center: { lat: 25.0330, lng: 121.5654 }, // Default center (Taipei)
             });
 
-            // Try to get user's location
+            // Add click event listener to the button
+            document.getElementById('locationButton').addEventListener('click', getUserLocation);
+        }
+
+        function getUserLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
@@ -39,23 +76,50 @@
                         new google.maps.Marker({
                             position: pos,
                             map: map,
-                            title: "You are here!"
+                            title: "你在這裡！"
                         });
 
                         // Center map on user's location
                         map.setCenter(pos);
                     },
-                    () => {
-                        alert("Error: The Geolocation service failed.");
+                    (error) => {
+                        let errorMessage;
+                        switch(error.code) {
+                            case error.PERMISSION_DENIED:
+                                errorMessage = "請允許網站存取位置資訊。";
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                errorMessage = "位置資訊不可用。";
+                                break;
+                            case error.TIMEOUT:
+                                errorMessage = "請求位置資訊超時。";
+                                break;
+                            default:
+                                errorMessage = "發生未知錯誤。";
+                        }
+                        alert(errorMessage);
                     }
                 );
             } else {
-                alert("Error: Your browser doesn't support geolocation.");
+                alert("你的瀏覽器不支援地理位置功能。");
             }
         }
     </script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key="+config.GOOGLE_MAPS_API_KEY+"&callback=initMap">
+    <!-- Environment variables and config -->
+    <script src="env.js"></script>
+    <script src="config.js"></script>
+    <script>
+        // Inject environment variable in production
+        if (window.ENV && window.ENV.GOOGLE_MAPS_API_KEY) {
+            window.GOOGLE_MAPS_API_KEY = window.ENV.GOOGLE_MAPS_API_KEY;
+        }
+
+        // Load Google Maps API with the key
+        const script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${getApiKey()}&callback=initMap`;
+        script.async = true;
+        script.defer = true;
+        document.body.appendChild(script);
     </script>
 </body>
 </html> 
