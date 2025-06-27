@@ -13,6 +13,25 @@
             margin: 0;
             padding: 0;
         }
+        .search-container {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            width: 80%;
+            max-width: 400px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+        #search-input {
+            width: calc(100% - 20px);
+            padding: 12px 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
         .info-window {
             padding: 10px;
             max-width: 300px;
@@ -33,16 +52,94 @@
             color: #f44336;
             font-weight: bold;
         }
+        .parking-list {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .parking-list.open {
+            max-height: 50vh;
+            overflow-y: auto;
+        }
+        .list-toggle {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1001;
+            padding: 12px 24px;
+            background: #4285F4;
+            color: white;
+            border: none;
+            border-radius: 24px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            font-size: 16px;
+        }
+        .list-toggle:hover {
+            background: #357ABD;
+        }
+        .parking-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .parking-item:last-child {
+            border-bottom: none;
+        }
+        .parking-item h3 {
+            margin: 0 0 5px 0;
+            color: #333;
+        }
+        .parking-item p {
+            margin: 3px 0;
+            color: #666;
+            font-size: 14px;
+        }
+        .marker-label {
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="搜尋地點...">
+    </div>
     <div id="map"></div>
+    <button class="list-toggle" onclick="toggleParkingList()">顯示最近停車場</button>
+    <div id="parking-list" class="parking-list">
+        <div id="parking-items"></div>
+    </div>
 
     <script>
         let map;
         let userMarker;
         let parkingMarkers = [];
+        let searchBox;
         const SEARCH_RADIUS = 1000; // 搜尋半徑（公尺）
+
+        // 解析費率資訊
+        function parseParkingFee(payex) {
+            if (!payex) return '無資料';
+            
+            // 嘗試匹配 "XX元/時" 或 "每小時XX元" 的模式
+            const hourlyFeeMatch = payex.match(/(\d+)元\/(小)?時|每小時(\d+)元/);
+            if (hourlyFeeMatch) {
+                const fee = hourlyFeeMatch[1] || hourlyFeeMatch[3];
+                return `${fee}元/時`;
+            }
+            
+            return '詳見說明';
+        }
 
         // 計算兩點之間的距離（使用 Haversine 公式）
         function getDistance(lat1, lon1, lat2, lon2) {
@@ -78,10 +175,60 @@
                     <p>地址：${parkingLot.address}</p>
                     <p>總車位：${parkingLot.totalcar} 個</p>
                     <p>剩餘車位：<span class="${statusClass}">${availableSpaces}</span></p>
-                    <p>收費資訊：${parkingLot.payex}</p>
+                    <p>收費：${parseParkingFee(parkingLot.payex)}</p>
                     <p>營業時間：${parkingLot.serviceTime || '24小時'}</p>
                 </div>
             `;
+        }
+
+        function createMarkerLabel(parkingLot) {
+            const fee = parseParkingFee(parkingLot.payex);
+            return {
+                text: fee,
+                color: "white",
+                fontSize: "12px",
+                fontWeight: "bold"
+            };
+        }
+
+        // 更新停車場列表
+        function updateParkingList(nearbyParkingLots) {
+            const listContainer = document.getElementById('parking-items');
+            listContainer.innerHTML = '';
+
+            // 只顯示最近的3個停車場
+            nearbyParkingLots.slice(0, 3).forEach(lot => {
+                const availableSpaces = lot.availability ? lot.availability.availablecar : '無資料';
+                const statusClass = availableSpaces > 0 ? 'available' : 'full';
+                
+                const item = document.createElement('div');
+                item.className = 'parking-item';
+                item.innerHTML = `
+                    <h3>${lot.parkingLot.name}</h3>
+                    <p>地址：${lot.parkingLot.address}</p>
+                    <p>收費：${parseParkingFee(lot.parkingLot.payex)}</p>
+                    <p>剩餘車位：<span class="${statusClass}">${availableSpaces}</span></p>
+                    <p>距離：${Math.round(lot.distance)}公尺</p>
+                `;
+                
+                item.addEventListener('click', () => {
+                    const position = {
+                        lat: parseFloat(lot.parkingLot.EntranceCoord.EntrancecoordInfo[0].Xcod),
+                        lng: parseFloat(lot.parkingLot.EntranceCoord.EntrancecoordInfo[0].Ycod)
+                    };
+                    map.setCenter(position);
+                    map.setZoom(18);
+                });
+                
+                listContainer.appendChild(item);
+            });
+        }
+
+        function toggleParkingList() {
+            const list = document.getElementById('parking-list');
+            list.classList.toggle('open');
+            const button = document.querySelector('.list-toggle');
+            button.textContent = list.classList.contains('open') ? '隱藏停車場列表' : '顯示最近停車場';
         }
 
         // 更新附近的停車場標記
@@ -98,14 +245,17 @@
                 // 清除現有標記
                 clearParkingMarkers();
 
-                const userLat = position.coords.latitude;
-                const userLng = position.coords.longitude;
+                const userLat = position.coords ? position.coords.latitude : position.lat;
+                const userLng = position.coords ? position.coords.longitude : position.lng;
 
                 // 建立可用性查詢表
                 const availabilityMap = {};
                 availData.data.park.forEach(park => {
                     availabilityMap[park.id] = park;
                 });
+
+                // 儲存所有附近的停車場資訊以便排序
+                const nearbyParkingLots = [];
 
                 // 過濾並標記附近的停車場
                 descData.data.park.forEach(parkingLot => {
@@ -124,12 +274,20 @@
                         if (distance <= SEARCH_RADIUS) {
                             const availability = availabilityMap[parkingLot.id];
                             const hasSpaces = availability && availability.availablecar > 0;
+
+                            nearbyParkingLots.push({
+                                parkingLot,
+                                availability,
+                                distance,
+                                position: { lat: parkLat, lng: parkLng }
+                            });
                             
                             // 創建標記
                             const marker = new google.maps.Marker({
                                 position: { lat: parkLat, lng: parkLng },
                                 map: map,
                                 title: parkingLot.name,
+                                label: createMarkerLabel(parkingLot),
                                 icon: {
                                     path: google.maps.SymbolPath.CIRCLE,
                                     fillColor: hasSpaces ? '#4CAF50' : '#f44336',
@@ -153,6 +311,12 @@
                         }
                     }
                 });
+
+                // 根據距離排序停車場
+                nearbyParkingLots.sort((a, b) => a.distance - b.distance);
+
+                // 更新停車場列表
+                updateParkingList(nearbyParkingLots);
             } catch (error) {
                 console.error('Error fetching parking data:', error);
             }
@@ -162,6 +326,57 @@
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 16,
                 center: { lat: 25.0330, lng: 121.5654 }, // Default center (Taipei)
+            });
+
+            // 初始化搜尋框
+            const input = document.getElementById('search-input');
+            const searchBox = new google.maps.places.SearchBox(input);
+
+            // 將搜尋框限制在台北市範圍
+            const taipeiBounds = new google.maps.LatLngBounds(
+                new google.maps.LatLng(25.0, 121.4),
+                new google.maps.LatLng(25.2, 121.7)
+            );
+            map.setBounds(taipeiBounds);
+
+            // 監聽搜尋結果
+            searchBox.addListener('places_changed', () => {
+                const places = searchBox.getPlaces();
+
+                if (places.length === 0) {
+                    return;
+                }
+
+                const place = places[0];
+                if (!place.geometry || !place.geometry.location) {
+                    console.log("Returned place contains no geometry");
+                    return;
+                }
+
+                // 更新地圖位置
+                map.setCenter(place.geometry.location);
+                map.setZoom(17);
+
+                // 更新用戶位置標記
+                if (userMarker) {
+                    userMarker.setMap(null);
+                }
+                userMarker = new google.maps.Marker({
+                    position: place.geometry.location,
+                    map: map,
+                    title: "搜尋位置",
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        fillColor: '#4285F4',
+                        fillOpacity: 1,
+                        strokeWeight: 2,
+                        strokeColor: '#ffffff',
+                        scale: 12
+                    }
+                });
+
+                // 更新附近停車場
+                updateNearbyParking(place.geometry.location);
             });
 
             // 請求用戶位置
@@ -226,7 +441,7 @@
             .then(apiKey => {
                 // Load Google Maps API with the key
                 const script = document.createElement('script');
-                script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`;
+                script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initMap`;
                 script.async = true;
                 script.defer = true;
                 document.body.appendChild(script);
@@ -236,7 +451,7 @@
                 // Fallback to local development
                 if (typeof config !== 'undefined' && config.GOOGLE_MAPS_API_KEY) {
                     const script = document.createElement('script');
-                    script.src = `https://maps.googleapis.com/maps/api/js?key=${config.GOOGLE_MAPS_API_KEY}&callback=initMap`;
+                    script.src = `https://maps.googleapis.com/maps/api/js?key=${config.GOOGLE_MAPS_API_KEY}&libraries=places&callback=initMap`;
                     script.async = true;
                     script.defer = true;
                     document.body.appendChild(script);
