@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Location on Google Maps</title>
+    <title>附近停車場資訊</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
@@ -13,6 +13,26 @@
             margin: 0;
             padding: 0;
         }
+        .info-window {
+            padding: 10px;
+            max-width: 300px;
+        }
+        .info-window h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .info-window p {
+            margin: 5px 0;
+            color: #666;
+        }
+        .available {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .full {
+            color: #f44336;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -20,17 +40,131 @@
 
     <script>
         let map;
+        let userMarker;
+        let parkingMarkers = [];
+        const SEARCH_RADIUS = 1000; // 搜尋半徑（公尺）
+
+        // 計算兩點之間的距離（使用 Haversine 公式）
+        function getDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371e3; // 地球半徑（公尺）
+            const φ1 = lat1 * Math.PI/180;
+            const φ2 = lat2 * Math.PI/180;
+            const Δφ = (lat2-lat1) * Math.PI/180;
+            const Δλ = (lon2-lon1) * Math.PI/180;
+
+            const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+                    Math.cos(φ1) * Math.cos(φ2) *
+                    Math.sin(Δλ/2) * Math.sin(Δλ/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+            return R * c;
+        }
+
+        // 清除所有停車場標記
+        function clearParkingMarkers() {
+            parkingMarkers.forEach(marker => marker.setMap(null));
+            parkingMarkers = [];
+        }
+
+        // 顯示停車場資訊視窗
+        function createInfoWindow(parkingLot, availability) {
+            const availableSpaces = availability ? availability.availablecar : '無資料';
+            const status = availableSpaces > 0 ? '尚有空位' : '已滿';
+            const statusClass = availableSpaces > 0 ? 'available' : 'full';
+            
+            return `
+                <div class="info-window">
+                    <h3>${parkingLot.name}</h3>
+                    <p>地址：${parkingLot.address}</p>
+                    <p>總車位：${parkingLot.totalcar} 個</p>
+                    <p>剩餘車位：<span class="${statusClass}">${availableSpaces}</span></p>
+                    <p>收費資訊：${parkingLot.payex}</p>
+                    <p>營業時間：${parkingLot.serviceTime || '24小時'}</p>
+                </div>
+            `;
+        }
+
+        // 更新附近的停車場標記
+        async function updateNearbyParking(position) {
+            try {
+                // 獲取停車場資訊
+                const descResponse = await fetch('TCMSV_alldesc.json');
+                const descData = await descResponse.json();
+                
+                // 獲取即時車位資訊
+                const availResponse = await fetch('TCMSV_allavailable.json');
+                const availData = await availResponse.json();
+
+                // 清除現有標記
+                clearParkingMarkers();
+
+                const userLat = position.coords.latitude;
+                const userLng = position.coords.longitude;
+
+                // 建立可用性查詢表
+                const availabilityMap = {};
+                availData.data.park.forEach(park => {
+                    availabilityMap[park.id] = park;
+                });
+
+                // 過濾並標記附近的停車場
+                descData.data.park.forEach(parkingLot => {
+                    // 檢查是否有座標資訊
+                    if (parkingLot.EntranceCoord && 
+                        parkingLot.EntranceCoord.EntrancecoordInfo && 
+                        parkingLot.EntranceCoord.EntrancecoordInfo[0]) {
+                        
+                        const parkLat = parseFloat(parkingLot.EntranceCoord.EntrancecoordInfo[0].Xcod);
+                        const parkLng = parseFloat(parkingLot.EntranceCoord.EntrancecoordInfo[0].Ycod);
+                        
+                        // 計算與使用者的距離
+                        const distance = getDistance(userLat, userLng, parkLat, parkLng);
+                        
+                        // 如果在搜尋半徑內
+                        if (distance <= SEARCH_RADIUS) {
+                            const availability = availabilityMap[parkingLot.id];
+                            const hasSpaces = availability && availability.availablecar > 0;
+                            
+                            // 創建標記
+                            const marker = new google.maps.Marker({
+                                position: { lat: parkLat, lng: parkLng },
+                                map: map,
+                                title: parkingLot.name,
+                                icon: {
+                                    path: google.maps.SymbolPath.CIRCLE,
+                                    fillColor: hasSpaces ? '#4CAF50' : '#f44336',
+                                    fillOpacity: 0.9,
+                                    strokeWeight: 2,
+                                    strokeColor: '#ffffff',
+                                    scale: 10
+                                }
+                            });
+
+                            // 添加資訊視窗
+                            const infoWindow = new google.maps.InfoWindow({
+                                content: createInfoWindow(parkingLot, availability)
+                            });
+
+                            marker.addListener('click', () => {
+                                infoWindow.open(map, marker);
+                            });
+
+                            parkingMarkers.push(marker);
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error fetching parking data:', error);
+            }
+        }
+
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 15,
+                zoom: 16,
                 center: { lat: 25.0330, lng: 121.5654 }, // Default center (Taipei)
             });
 
-            // Request user location immediately
-            getUserLocation();
-        }
-
-        function getUserLocation() {
+            // 請求用戶位置
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
@@ -39,15 +173,29 @@
                             lng: position.coords.longitude,
                         };
 
-                        // Create a marker for user's location
-                        new google.maps.Marker({
+                        // 創建用戶位置標記
+                        if (userMarker) {
+                            userMarker.setMap(null);
+                        }
+                        userMarker = new google.maps.Marker({
                             position: pos,
                             map: map,
-                            title: "你在這裡！"
+                            title: "你在這裡！",
+                            icon: {
+                                path: google.maps.SymbolPath.CIRCLE,
+                                fillColor: '#4285F4',
+                                fillOpacity: 1,
+                                strokeWeight: 2,
+                                strokeColor: '#ffffff',
+                                scale: 12
+                            }
                         });
 
-                        // Center map on user's location
+                        // 將地圖中心設為用戶位置
                         map.setCenter(pos);
+
+                        // 更新附近停車場資訊
+                        updateNearbyParking(position);
                     },
                     (error) => {
                         let errorMessage;
