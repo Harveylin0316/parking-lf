@@ -404,7 +404,8 @@ function startNavigation(lat, lng, name) {
                 zoomControl: true, // 保留縮放控制按鈕
                 zoomControlOptions: {
                     position: google.maps.ControlPosition.RIGHT_BOTTOM
-                }
+                },
+                clickableIcons: false // 禁用預設地標的點擊，但保留顯示
             });
 
             // 添加地圖點擊事件監聽器
