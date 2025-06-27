@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="search-container">
-        <input type="text" id="search-input" placeholder="搜尋地點...">
+        <input type="text" id="search-input" placeholder="你想去哪裡？">
         <button class="search-button" onclick="handleSearch()">搜尋</button>
     </div>
     <div id="map"></div>
@@ -66,11 +66,30 @@
             parkingMarkers = [];
         }
 
+        // 開啟導航
+        function startNavigation(lat, lng, name) {
+            // 使用 Google Maps 導航
+            const destination = `${lat},${lng}`;
+            // 在手機上優先使用 Google Maps App
+            if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                window.open(`google.maps://dir/?api=1&destination=${destination}&travelmode=driving&dir_action=navigate`);
+                // 如果無法開啟 App，則使用網頁版
+                setTimeout(() => {
+                    window.open(`https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`);
+                }, 500);
+            } else {
+                // 在桌面版直接開啟網頁版導航
+                window.open(`https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`);
+            }
+        }
+
         // 更新停車場資訊視窗內容
         function createInfoWindow(parkingLot, availability) {
             const availableSpaces = availability ? availability.availablecar : '無資料';
             const status = availableSpaces > 0 ? '尚有空位' : '已滿';
             const statusClass = availableSpaces > 0 ? 'available' : 'full';
+            const lat = parkingLot.EntranceCoord.EntrancecoordInfo[0].Xcod;
+            const lng = parkingLot.EntranceCoord.EntrancecoordInfo[0].Ycod;
             
             return `
                 <div class="info-window">
@@ -80,6 +99,10 @@
                     <p>剩餘車位：<span class="${statusClass}">${availableSpaces}</span></p>
                     <p>收費：${parseParkingFee(parkingLot.payex)}</p>
                     <p>營業時間：${parkingLot.serviceTime || '24小時'}</p>
+                    <button class="navigation-button" onclick="startNavigation('${lat}', '${lng}', '${parkingLot.name}')">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBmaWxsPSIjRkZGRkZGIj48cGF0aCBkPSJNMjEuNzEgMTEuMjlsLTktOS4wNzJjLS4zOS0uMzktMS4wMi0uMzktMS40MSAwbC05IDkuMDcyYy0uMzkuMzktLjM5IDEuMDIgMCAxLjQxbDkgOS4wNzFjLjM5LjM5IDEuMDIuMzkgMS40MSAwbDktOS4wNzFjLjM5LS4zOS4zOS0xLjAyIDAtMS40MXpNMTQgMTQuNThWMTJoLTR2M0g4di02aDZ2LTIuNThsNC41OSA0LjU5TDE0IDE0LjU4eiIvPjwvc3ZnPg==" alt="導航圖標">
+                        開始導航
+                    </button>
                 </div>
             `;
         }
