@@ -252,20 +252,23 @@ div[style*="cursor: pointer"][style*="width: 40px"][style*="background-color: rg
     background-color: #4285F4 !important;
     color: white !important;
     border: none !important;
-    padding: 8px 16px !important;
+    padding: 10px 20px !important;
     border-radius: 4px !important;
     cursor: pointer !important;
-    display: flex !important;
+    display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    font-size: 14px !important;
+    font-size: 16px !important;
     font-weight: 500 !important;
     text-decoration: none !important;
     margin-top: 8px !important;
-    width: 100% !important;
+    width: auto !important;
+    min-width: 140px !important;
+    white-space: nowrap !important;
     -webkit-appearance: none !important;
     -moz-appearance: none !important;
     appearance: none !important;
+    line-height: 1.5 !important;
 }
 
 button.navigation-button {
@@ -281,4 +284,5 @@ button.navigation-button {
     width: 20px !important;
     height: 20px !important;
     margin-right: 8px !important;
+    flex-shrink: 0 !important;
 } 
