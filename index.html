@@ -3,8 +3,10 @@
 <head>
     <title>附近停車場資訊</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="style.css">
+    <!-- LIFF SDK -->
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <style>
         /* ... existing styles ... */
         .navigation-button {
@@ -90,7 +92,11 @@
         <div id="parking-items"></div>
     </div>
 
-    <script>
+    <script type="module">
+        import { initializeLiff, shareParkingInfo, closeLiffWindow } from './js/modules/liff-config.js';
+        import { getMergedParkingData, getNearbyParkingLots } from './js/modules/parking-api.js';
+        import { initializeMap, updateUserLocation, clearParkingMarkers, addParkingMarker, showInfoWindow } from './js/modules/map-handler.js';
+
         let map;
         let userMarker;
         let parkingMarkers = [];
@@ -102,6 +108,7 @@
         let lastUpdatePosition = null;
         const MIN_UPDATE_DISTANCE = 200; // 最小更新距離（公尺）
         let updateTimeout = null;
+        let parkingLots = [];
 
         // 解析費率資訊
         function parseParkingFee(payex) {
@@ -724,6 +731,88 @@
                     document.body.appendChild(script);
                 }
             });
+
+        // 初始化應用
+        async function initialize() {
+            try {
+                // 初始化 LIFF
+                await initializeLiff();
+                
+                // 從 Netlify 函數獲取 Google Maps API Key
+                const response = await fetch('/.netlify/functions/get-maps-key');
+                const { apiKey } = await response.json();
+                
+                // 初始化地圖
+                map = await initializeMap(apiKey);
+                
+                // 獲取使用者位置
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        handlePositionSuccess,
+                        handlePositionError,
+                        { enableHighAccuracy: true }
+                    );
+                }
+                
+                // 獲取停車場資料
+                parkingLots = await getMergedParkingData();
+                
+            } catch (error) {
+                console.error('初始化失敗:', error);
+            }
+        }
+
+        // 處理位置成功
+        function handlePositionSuccess(position) {
+            const userLocation = updateUserLocation(position);
+            updateNearbyParkingLots(userLocation.lat, userLocation.lng);
+        }
+
+        // 處理位置錯誤
+        function handlePositionError(error) {
+            console.error('無法獲取位置:', error);
+            // 預設顯示台北市中心
+            updateNearbyParkingLots(25.0330, 121.5654);
+        }
+
+        // 更新附近停車場
+        function updateNearbyParkingLots(lat, lng) {
+            clearParkingMarkers();
+            let radius = SEARCH_RADIUS;
+            let nearbyLots = getNearbyParkingLots(parkingLots, lat, lng, radius);
+            
+            // 如果找到的停車場太少，擴大搜尋範圍
+            while (nearbyLots.length < MIN_VISIBLE_PARKING_LOTS && radius < MAX_SEARCH_RADIUS) {
+                radius += 500;
+                nearbyLots = getNearbyParkingLots(parkingLots, lat, lng, radius);
+            }
+            
+            nearbyLots.forEach(lot => {
+                addParkingMarker(lot, showInfoWindow);
+            });
+            
+            updateParkingList(nearbyLots);
+        }
+
+        // 顯示停車場詳細資訊
+        window.showParkingDetails = function(id) {
+            const lot = parkingLots.find(p => p.id === id);
+            if (!lot) return;
+            
+            const marker = parkingMarkers.find(m => m.getTitle() === lot.name);
+            if (marker) {
+                showInfoWindow(lot, marker);
+                map.panTo(marker.getPosition());
+            }
+        };
+
+        // 分享停車場資訊
+        window.shareParkingInfo = async function(lot) {
+            await shareParkingInfo(lot);
+        };
+
+        // 初始化應用
+        initialize();
     </script>
     <!-- Local development config -->
     <script src="config.js"></script>
