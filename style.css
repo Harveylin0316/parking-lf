@@ -263,6 +263,14 @@ div[style*="cursor: pointer"][style*="width: 40px"][style*="background-color: rg
     text-decoration: none !important;
     margin-top: 8px !important;
     width: 100% !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+}
+
+button.navigation-button {
+    background: #4285F4 !important;
+    background-color: #4285F4 !important;
 }
 
 .navigation-button:hover {

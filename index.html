@@ -68,18 +68,28 @@
 
         // 開啟導航
         function startNavigation(lat, lng, name) {
-            // 使用 Google Maps 導航
             const destination = `${lat},${lng}`;
-            // 在手機上優先使用 Google Maps App
-            if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                window.open(`google.maps://dir/?api=1&destination=${destination}&travelmode=driving&dir_action=navigate`);
-                // 如果無法開啟 App，則使用網頁版
+            const mapsUrl = `google.maps://dir/?api=1&destination=${destination}&travelmode=driving&dir_action=navigate`;
+            const webUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`;
+            
+            // 檢測設備類型
+            if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                // iOS 設備
+                window.location.href = mapsUrl;
+                // 如果無法打開 App，則延遲後打開網頁版
                 setTimeout(() => {
-                    window.open(`https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`);
-                }, 500);
+                    window.location.href = webUrl;
+                }, 2000);
+            } else if (/Android/i.test(navigator.userAgent)) {
+                // Android 設備
+                window.location.href = mapsUrl;
+                // 如果無法打開 App，則延遲後打開網頁版
+                setTimeout(() => {
+                    window.location.href = webUrl;
+                }, 2000);
             } else {
-                // 在桌面版直接開啟網頁版導航
-                window.open(`https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`);
+                // 桌面設備直接打開網頁版
+                window.location.href = webUrl;
             }
         }
 
