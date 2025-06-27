@@ -67,29 +67,42 @@
         }
 
         // 開啟導航
-        function startNavigation(lat, lng, name) {
-            const destination = `${lat},${lng}`;
-            const mapsUrl = `google.maps://dir/?api=1&destination=${destination}&travelmode=driving&dir_action=navigate`;
-            const webUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`;
-            
-            // 創建一個隱藏的 iframe
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            document.body.appendChild(iframe);
-            
-            // 檢測設備類型
-            if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-                // 移動設備：嘗試打開 Google Maps 應用
-                iframe.src = mapsUrl;
-                
-                // 移除 iframe
-                setTimeout(() => {
-                    document.body.removeChild(iframe);
-                }, 100);
-            } else {
-                // 桌面設備：在新窗口打開網頁版地圖
-                window.open(webUrl, '_blank');
+function startNavigation(lat, lng, name) {
+    const destination = `${lat},${lng}`;
+    
+    // 檢測設備類型
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        // iOS 設備：使用 comgooglemaps:// scheme
+        const iosUrl = `comgooglemaps://?daddr=${destination}&directionsmode=driving`;
+        const webUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`;
+        
+        // 嘗試打開 Google Maps App
+        window.location.href = iosUrl;
+        
+        // 如果 2 秒後還在同一頁面，說明沒有安裝 Google Maps，則打開網頁版
+        setTimeout(() => {
+            if (document.hidden !== true) {
+                window.location.href = webUrl;
             }
+        }, 2000);
+    } else if (/Android/i.test(navigator.userAgent)) {
+        // Android 設備：使用 google.navigation: scheme
+        const androidUrl = `google.navigation:q=${destination}&mode=d`;
+        const webUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`;
+        
+        // 嘗試打開 Google Maps App
+        window.location.href = androidUrl;
+        
+        // 如果 2 秒後還在同一頁面，說明沒有安裝 Google Maps，則打開網頁版
+        setTimeout(() => {
+            if (document.hidden !== true) {
+                window.location.href = webUrl;
+            }
+        }, 2000);
+    } else {
+        // 桌面設備：在新窗口打開網頁版地圖
+        window.open(`https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`, '_blank');
+    }
         }
 
         // 更新停車場資訊視窗內容
