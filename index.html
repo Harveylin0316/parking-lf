@@ -416,6 +416,26 @@ function startNavigation(lat, lng, name) {
                 }
             });
 
+            // 添加地圖拖動結束事件監聽器
+            map.addListener('dragend', () => {
+                const center = map.getCenter();
+                const position = {
+                    lat: center.lat(),
+                    lng: center.lng()
+                };
+                updateNearbyParking(position);
+            });
+
+            // 添加地圖縮放結束事件監聽器
+            map.addListener('zoom_changed', () => {
+                const center = map.getCenter();
+                const position = {
+                    lat: center.lat(),
+                    lng: center.lng()
+                };
+                updateNearbyParking(position);
+            });
+
             // 初始化搜尋框
             const input = document.getElementById('search-input');
             const searchBox = new google.maps.places.SearchBox(input);
