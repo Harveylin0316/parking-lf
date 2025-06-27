@@ -13,28 +13,9 @@
             margin: 0;
             padding: 0;
         }
-        #locationButton {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-            padding: 10px 20px;
-            background-color: #4285f4;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        #locationButton:hover {
-            background-color: #357abd;
-        }
     </style>
 </head>
 <body>
-    <button id="locationButton">顯示我的位置</button>
     <div id="map"></div>
 
     <script>
@@ -45,8 +26,8 @@
                 center: { lat: 25.0330, lng: 121.5654 }, // Default center (Taipei)
             });
 
-            // Add click event listener to the button
-            document.getElementById('locationButton').addEventListener('click', getUserLocation);
+            // Request user location immediately
+            getUserLocation();
         }
 
         function getUserLocation() {
