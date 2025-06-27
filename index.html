@@ -32,6 +32,47 @@
             width: 20px;
             height: 20px;
         }
+
+        .info-window {
+            padding: 12px;
+            max-width: 300px;
+        }
+
+        .info-window-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .info-window-header h3 {
+            margin: 0;
+            padding-right: 8px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .info-window p {
+            margin: 4px 0;
+            font-size: 14px;
+        }
+
+        .gm-ui-hover-effect {
+            top: 0 !important;
+            right: 0 !important;
+        }
+
+        .gm-style-iw {
+            padding: 0 !important;
+        }
+
+        .gm-style-iw-d {
+            overflow: hidden !important;
+        }
+
+        .gm-style-iw-c {
+            padding: 0 !important;
+        }
         /* ... rest of the styles ... */
     </style>
 </head>
@@ -148,7 +189,9 @@
             const content = document.createElement('div');
             content.className = 'info-window';
             content.innerHTML = `
-                <h3>${parkingLot.name}</h3>
+                <div class="info-window-header">
+                    <h3>${parkingLot.name}</h3>
+                </div>
                 <p>地址：${parkingLot.address}</p>
                 <p>總車位：${parkingLot.totalcar} 個</p>
                 <p>剩餘車位：<span class="${statusClass}">${availableSpaces}</span></p>
