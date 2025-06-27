@@ -213,4 +213,9 @@ body {
     font-size: 12px;
     font-weight: bold;
     text-align: center;
+}
+
+/* 隱藏 Google Maps 相機控制按鈕 */
+.gm-control-active[aria-label="Map camera controls"] {
+    display: none !important;
 } 
