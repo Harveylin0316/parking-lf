@@ -66,16 +66,56 @@
             background-color: #f5f5f5;
         }
         .info-window {
-            padding: 10px;
+            padding: 15px;
             max-width: 300px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
         }
         .info-window h3 {
             margin: 0 0 10px 0;
             color: #333;
+            font-size: 16px;
+            font-weight: 600;
         }
         .info-window p {
             margin: 5px 0;
             color: #666;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        /* 自定義 InfoWindow 樣式 */
+        .gm-style-iw {
+            padding: 0 !important;
+            background-color: white !important;
+            border-radius: 8px !important;
+            box-shadow: 0 2px 7px 1px rgba(0, 0, 0, 0.3) !important;
+        }
+        .gm-style-iw-d {
+            overflow: hidden !important;
+            padding: 0 !important;
+        }
+        .gm-style-iw button {
+            top: 0 !important;
+            right: 0 !important;
+            background-color: white !important;
+            border-radius: 50% !important;
+            width: 30px !important;
+            height: 30px !important;
+            margin: 5px 5px 0 0 !important;
+            opacity: 1 !important;
+        }
+        .gm-style-iw button:hover {
+            background-color: #f5f5f5 !important;
+        }
+        .gm-style-iw button span {
+            margin: 3px !important;
+            width: 24px !important;
+            height: 24px !important;
+        }
+        .gm-style-iw-c {
+            padding: 0 !important;
+        }
+        .gm-style-iw * {
+            box-sizing: border-box;
         }
         .available {
             color: #4CAF50;
@@ -170,6 +210,7 @@
         let userMarker;
         let parkingMarkers = [];
         let searchBox;
+        let currentInfoWindow = null; // 追踪當前打開的資訊視窗
         const SEARCH_RADIUS = 1000; // 搜尋半徑（公尺）
 
         // 解析費率資訊
@@ -208,7 +249,7 @@
             parkingMarkers = [];
         }
 
-        // 顯示停車場資訊視窗
+        // 更新停車場資訊視窗內容
         function createInfoWindow(parkingLot, availability) {
             const availableSpaces = availability ? availability.availablecar : '無資料';
             const status = availableSpaces > 0 ? '尚有空位' : '已滿';
@@ -350,11 +391,19 @@
 
                             // 添加資訊視窗
                             const infoWindow = new google.maps.InfoWindow({
-                                content: createInfoWindow(parkingLot, availability)
+                                content: createInfoWindow(parkingLot, availability),
+                                maxWidth: 300,
+                                disableAutoPan: false, // 開啟自動平移
+                                pixelOffset: new google.maps.Size(0, -10) // 稍微向上偏移
                             });
 
                             marker.addListener('click', () => {
+                                // 關閉其他開啟的資訊視窗
+                                if (currentInfoWindow) {
+                                    currentInfoWindow.close();
+                                }
                                 infoWindow.open(map, marker);
+                                currentInfoWindow = infoWindow;
                             });
 
                             parkingMarkers.push(marker);
