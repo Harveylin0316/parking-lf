@@ -43,6 +43,9 @@ body {
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .search-button:hover {
@@ -218,44 +221,44 @@ body {
 /* 隱藏 Google Maps 控制按鈕 */
 .gm-control-active[aria-label="Map camera controls"],
 .gm-control-active[aria-label="Zoom in"],
-.gm-control-active[aria-label="Zoom out"] {
+.gm-control-active[aria-label="Zoom out"],
+.gmnoprint.gm-bundled-control.gm-bundled-control-on-bottom {
     display: none !important;
 }
 
-/* 導航按鈕樣式 */
+/* 按鈕基本樣式 */
+.search-button,
 .navigation-button {
+    padding: 8px 16px;
+    background: #4285F4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #FF4E50;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    margin-top: 15px;
-    width: 100%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease;
 }
 
+.search-button:hover,
 .navigation-button:hover {
-    background-color: #E53935;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transform: translateY(-1px);
+    background: #357ABD;
 }
 
+.search-button:active,
 .navigation-button:active {
-    background-color: #D32F2F;
-    transform: translateY(1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background: #2B6AA0;
+}
+
+.navigation-button {
+    width: 100%;
+    margin-top: 10px;
 }
 
 .navigation-button img {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     margin-right: 8px;
-    vertical-align: middle;
 } 
