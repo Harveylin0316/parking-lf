@@ -435,7 +435,13 @@
                 center: { lat: 25.0330, lng: 121.5654 }, // 暫時的中心點
                 gestureHandling: 'greedy', // 允許在移動設備上直接拖動地圖
                 mapTypeControl: false, // 隱藏地圖類型切換按鈕
-                mapTypeId: google.maps.MapTypeId.ROADMAP // 設置預設地圖類型為一般地圖
+                mapTypeId: google.maps.MapTypeId.ROADMAP, // 設置預設地圖類型為一般地圖
+                fullscreenControl: false, // 隱藏全螢幕控制按鈕
+                streetViewControl: false, // 隱藏街景控制按鈕
+                zoomControl: true, // 保留縮放控制按鈕
+                zoomControlOptions: {
+                    position: google.maps.ControlPosition.RIGHT_BOTTOM
+                }
             });
 
             // 初始化搜尋框
@@ -543,7 +549,13 @@
             });
 
             // 更新附近停車場
-            updateNearbyParking(place.geometry.location);
+            const searchLocation = {
+                coords: {
+                    latitude: place.geometry.location.lat(),
+                    longitude: place.geometry.location.lng()
+                }
+            };
+            updateNearbyParking(searchLocation);
         }
 
         function handleLocationError(error) {
