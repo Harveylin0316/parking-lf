@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="Big5" ?>
+<cms:ExchangeData xmlns:cms="http://infoexch.pma.gov.tw/Exchange/cms">
+<cms:CenterName>臺北停管處</cms:CenterName>
+<cms:ExchangeTime>2025/06/27 10:43:38</cms:ExchangeTime>
+<cms:CmsDataSet>
+<cms:CmsData>
+<cms:CmsID>P006</cms:CmsID>
+<cms:CmsLocation>RG4X8 秀明路1段221號對面人行道上</cms:CmsLocation>
+<cms:ContentPark>設備斷線</cms:ContentPark>
+<cms:ContentMsg>設備斷線</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P007</cms:CmsID>
+<cms:CmsLocation>RG4X8 興隆路三段 111 號萬芳醫院前人行道上</cms:CmsLocation>
+<cms:ContentPark>設備斷線</cms:ContentPark>
+<cms:ContentMsg>設備斷線</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P009</cms:CmsID>
+<cms:CmsLocation>RG4X8新光路一段159巷北向後約200公尺</cms:CmsLocation>
+<cms:ContentPark>設備斷線</cms:ContentPark>
+<cms:ContentMsg>設備斷線</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P011</cms:CmsID>
+<cms:CmsLocation>RG8X3 基隆路四段汀州路四段交會處分隔島上</cms:CmsLocation>
+<cms:ContentPark>設備斷線</cms:ContentPark>
+<cms:ContentMsg>設備斷線</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P023</cms:CmsID>
+<cms:CmsLocation>RG4X8 瑞光路66巷前人行道上西南向</cms:CmsLocation>
+<cms:ContentPark>設備斷線</cms:ContentPark>
+<cms:ContentMsg>設備斷線</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P029</cms:CmsID>
+<cms:CmsLocation>RG4X8承德路七段380號前中央分隔島上</cms:CmsLocation>
+<cms:ContentPark>設備斷線</cms:ContentPark>
+<cms:ContentMsg>設備斷線</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P035</cms:CmsID>
+<cms:CmsLocation>RG8X3湖山路1段20號前交叉路口中央分隔島前</cms:CmsLocation>
+<cms:ContentPark>設備斷線</cms:ContentPark>
+<cms:ContentMsg>設備斷線</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P036</cms:CmsID>
+<cms:CmsLocation>RG4X8 敬業三路161巷176號後方敬業三路人行道上</cms:CmsLocation>
+<cms:ContentPark>設備斷線</cms:ContentPark>
+<cms:ContentMsg>設備斷線</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P051</cms:CmsID>
+<cms:CmsLocation>RGB4X8 民族東路10、12號前人行道上(全彩)</cms:CmsLocation>
+<cms:ContentPark>設備斷線</cms:ContentPark>
+<cms:ContentMsg>設備斷線</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P062</cms:CmsID>
+<cms:CmsLocation>RG4X8延平北路六段261巷2號後方環河北路中央分隔島</cms:CmsLocation>
+<cms:ContentPark>設備斷線</cms:ContentPark>
+<cms:ContentMsg>設備斷線</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P063</cms:CmsID>
+<cms:CmsLocation>RG4X8延平北路五段2之1號前人行道</cms:CmsLocation>
+<cms:ContentPark>設備斷線</cms:ContentPark>
+<cms:ContentMsg>設備斷線</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P075</cms:CmsID>
+<cms:CmsLocation>RG4X8延平北路二段永樂國小前人行道</cms:CmsLocation>
+<cms:ContentPark>設備斷線</cms:ContentPark>
+<cms:ContentMsg>設備斷線</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P077</cms:CmsID>
+<cms:CmsLocation>RG8X3承德路二段與民權西路102巷交會口中央分隔島</cms:CmsLocation>
+<cms:ContentPark>設備斷線</cms:ContentPark>
+<cms:ContentMsg>設備斷線</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P093</cms:CmsID>
+<cms:CmsLocation>RG4X8辛亥路二段195號前(分隔島)</cms:CmsLocation>
+<cms:ContentPark>設備斷線</cms:ContentPark>
+<cms:ContentMsg>設備斷線</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P100</cms:CmsID>
+<cms:CmsLocation>RG4X8民權東路三段142號前(人行道)</cms:CmsLocation>
+<cms:ContentPark>設備斷線</cms:ContentPark>
+<cms:ContentMsg>設備斷線</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P102</cms:CmsID>
+<cms:CmsLocation>RG4X8民權東路四段100號旁(分隔島上)</cms:CmsLocation>
+<cms:ContentPark>設備斷線</cms:ContentPark>
+<cms:ContentMsg>設備斷線</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P103</cms:CmsID>
+<cms:CmsLocation>RG4X8民權東路五段1號前(人行道)</cms:CmsLocation>
+<cms:ContentPark>設備斷線</cms:ContentPark>
+<cms:ContentMsg>設備斷線</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P135</cms:CmsID>
+<cms:CmsLocation>RG8X3 經貿一路</cms:CmsLocation>
+<cms:ContentPark>設備斷線</cms:ContentPark>
+<cms:ContentMsg>設備斷線</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P001</cms:CmsID>
+<cms:CmsLocation>RG4X8 思源路自來水園區門口處約100M處人行道上</cms:CmsLocation>
+<cms:ContentPark>大安森林公園 183,龍門國中 34</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P002</cms:CmsID>
+<cms:CmsLocation>RG4X8 羅斯福路三段242前人行道上</cms:CmsLocation>
+<cms:ContentPark>大安森林公園 186,龍門國中 33</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P003</cms:CmsID>
+<cms:CmsLocation>RG4X8 新生南路三段86號南向人行道上</cms:CmsLocation>
+<cms:ContentPark>大安森林公園 186,龍門國中 35</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P004</cms:CmsID>
+<cms:CmsLocation>RG4X8 辛亥路三段芳蘭路附近交叉路口處70公尺右側人行道上</cms:CmsLocation>
+<cms:ContentPark>辛亥國小 39,興隆公園 73,第二殯儀館 ,辛亥高架橋下 44,黎元停車場 24,二殯周邊停車場 150</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P005</cms:CmsID>
+<cms:CmsLocation>RG4X8 羅斯福路六段437號前分隔島上</cms:CmsLocation>
+<cms:ContentPark>景華公園 146,辛亥國小 39</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P008</cms:CmsID>
+<cms:CmsLocation>RG4X8羅斯福路五段190號前分隔島上(武功國小前)</cms:CmsLocation>
+<cms:ContentPark>花木批發市場 78</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P010</cms:CmsID>
+<cms:CmsLocation>RG4X8 文山區新光路二段動物園側門對面</cms:CmsLocation>
+<cms:ContentPark>萬興國小 16, 滿場,動物園高灘地 滿場</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P013</cms:CmsID>
+<cms:CmsLocation>RG3X8 木柵路五段18之3號</cms:CmsLocation>
+<cms:ContentPark>捷運機廠 滿場,動物園河川地 滿場,和平東路平面停車場 4</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人請注意小心駕駛,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P014</cms:CmsID>
+<cms:CmsLocation>RG4X8 向陽路182號前分隔島上</cms:CmsLocation>
+<cms:ContentPark>臺北流行音樂中心停車場 156,興中立體 144,世貿公園 157,捷運南港展覽館 滿場</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P015</cms:CmsID>
+<cms:CmsLocation>RG8X3 三重路５５號前與經貿二路口對面（槽化島上）</cms:CmsLocation>
+<cms:ContentPark>捷運南港展覽館 ,嘟嘟房南港展館2站 187,南港三井停車場 1805,TFC PLAZA大樓停車場 438,臺北流行音樂中心停車場 156</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人請注意小心駕駛,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P016</cms:CmsID>
+<cms:CmsLocation>RG3X8南港區八德路四段８２８號前（人行道上）</cms:CmsLocation>
+<cms:ContentPark>臺北流行音樂中心停車場 156,八德立體停車場 26</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人請注意小心駕駛,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P017</cms:CmsID>
+<cms:CmsLocation>RG4X8 成功路二段312巷前分隔島上</cms:CmsLocation>
+<cms:ContentPark>湖興立體 106,大湖公園 17,捷運文德站 14</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P018</cms:CmsID>
+<cms:CmsLocation>RG4X8北市內湖區民權東路六段１５０－１號前</cms:CmsLocation>
+<cms:ContentPark>大湖公園 17,湖興立體 106</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P020</cms:CmsID>
+<cms:CmsLocation>RG4X8 成功路五段63號前(西北向)槽化島上</cms:CmsLocation>
+<cms:ContentPark>湖興立體 106,麗湖國小 43</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P021</cms:CmsID>
+<cms:CmsLocation>RG4X8 民權東路六段298號前中央分隔島東北向</cms:CmsLocation>
+<cms:ContentPark>麗湖國小 43,大湖公園 17</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P022</cms:CmsID>
+<cms:CmsLocation>RG4X8 內湖路一段與港墘路交會口(東北向)槽化島上西向</cms:CmsLocation>
+<cms:ContentPark>港富立體 70,西湖公園   4,西康   滿場</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P024</cms:CmsID>
+<cms:CmsLocation>RG8X3 堤頂大道89號快車道與慢車道中分隔島上北向</cms:CmsLocation>
+<cms:ContentPark>台北花卉１館 180,好市多內湖店 180</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人請注意小心駕駛,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P025</cms:CmsID>
+<cms:CmsLocation>RG4X8 舊宗路一段與民權東路六段交會處前100公尺中央分隔道上</cms:CmsLocation>
+<cms:ContentPark>台北花卉１館 180,好市多內湖店COSTCO 180</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P026</cms:CmsID>
+<cms:CmsLocation>RG8X3 成功路三段75號前方分隔島北向</cms:CmsLocation>
+<cms:ContentPark>大湖公園 17,捷運文德站 14,西康   滿場</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人請注意小心駕駛,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P027</cms:CmsID>
+<cms:CmsLocation>RG8X3 成功交流道(北上)下交流道處與成功路二段交會處槽化島上</cms:CmsLocation>
+<cms:ContentPark>臺北流行音樂中心停車場 156,湖興立體 106</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人請注意小心駕駛,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P028</cms:CmsID>
+<cms:CmsLocation>RG4X8大度路三段155號前中央分隔</cms:CmsLocation>
+<cms:ContentPark>忠義站捷運 14,好市多   2</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P030</cms:CmsID>
+<cms:CmsLocation>RG4X8天母西路95巷</cms:CmsLocation>
+<cms:ContentPark>石牌國小 21,振興公園 19,榮總院區 202</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P031</cms:CmsID>
+<cms:CmsLocation>RG4X8大業路705號對面人行道上</cms:CmsLocation>
+<cms:ContentPark>大業  76,七星公園 135</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P032</cms:CmsID>
+<cms:CmsLocation>RG4X8北投路一段93巷對面花圃</cms:CmsLocation>
+<cms:ContentPark>大業  76,七星公園 135,大豐公園 9</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P033</cms:CmsID>
+<cms:CmsLocation>RG4X8大業路304號前中央分隔島上</cms:CmsLocation>
+<cms:ContentPark>大業立體 76,七星公園 135,大豐公園 9</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P034</cms:CmsID>
+<cms:CmsLocation>RG4X8光明路大業路交會處</cms:CmsLocation>
+<cms:ContentPark>七星公園 135,大業 76</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P037</cms:CmsID>
+<cms:CmsLocation>RG4X8 北安路777號對面人行道上</cms:CmsLocation>
+<cms:ContentPark>濱江國中 16,西康    滿場</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P038</cms:CmsID>
+<cms:CmsLocation>RG4X8民族東路262號前方中央分隔島</cms:CmsLocation>
+<cms:ContentPark>濱江市場 65,榮星花園 15</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P039</cms:CmsID>
+<cms:CmsLocation>RG4X8民族東路151號前方中央分隔島</cms:CmsLocation>
+<cms:ContentPark></cms:ContentPark>
+<cms:ContentMsg>花博公園圓山地下停車場滿場，請勿前往。</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P040</cms:CmsID>
+<cms:CmsLocation>RG4X8 民權東路三段24號對面人行道</cms:CmsLocation>
+<cms:ContentPark>濱江市場 65,榮星花園 15,建北橋下IA區 滿場,建北橋下IB區 2,建北橋下J區 滿場</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P041</cms:CmsID>
+<cms:CmsLocation>RG4X8民權東路二段174、176號前方人行道上</cms:CmsLocation>
+<cms:ContentPark>榮星花園 15,濱江市場 65,民有市場 滿場,建北橋下H區 滿場,建北橋下G區 滿場</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P042</cms:CmsID>
+<cms:CmsLocation>RGB4X8 建國北路民權東路交會處人行道上(全彩)</cms:CmsLocation>
+<cms:ContentPark>榮星花園 15,濱江市場 65,建北橋下J區 滿場</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P043</cms:CmsID>
+<cms:CmsLocation>RG4X8 長春路與中原街交會口吉林國小前方人行道上</cms:CmsLocation>
+<cms:ContentPark>長安國小 ,長春路平面停車場 7</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P044</cms:CmsID>
+<cms:CmsLocation>RG4X8市民大道二段西向過林森北路約75公尺處</cms:CmsLocation>
+<cms:ContentPark></cms:ContentPark>
+<cms:ContentMsg>建成公園地下停車場滿場，請勿前往。</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P045</cms:CmsID>
+<cms:CmsLocation>RG4X8市民大道二段本線與林森北路交會處後70公尺處(西向東)</cms:CmsLocation>
+<cms:ContentPark>市民大道林金段  344,市民大道建復段  5,台北資訊園區 191</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P046</cms:CmsID>
+<cms:CmsLocation>RG4X8市民大道二段西向與長安東路一段52巷交會處</cms:CmsLocation>
+<cms:ContentPark>市民大道林金段 344,市民大道中林段   27,市民大道公中段 55,台北資訊園區 191</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P047</cms:CmsID>
+<cms:CmsLocation>RG4X8 新生北路2段143、145號前分隔島</cms:CmsLocation>
+<cms:ContentPark></cms:ContentPark>
+<cms:ContentMsg>花博公園圓山地下停車場滿場，請勿前往。</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P048</cms:CmsID>
+<cms:CmsLocation>RG3X8 中山北路二段63號前快、慢車道分隔島</cms:CmsLocation>
+<cms:ContentPark></cms:ContentPark>
+<cms:ContentMsg>花博公園圓山地下停車場滿場，請勿前往。</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P049</cms:CmsID>
+<cms:CmsLocation>RGB4X8 中山北路二段137巷口前中央分隔島上(全彩)</cms:CmsLocation>
+<cms:ContentPark>花博公園 滿場,濱江市場 65</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P050</cms:CmsID>
+<cms:CmsLocation>RG4X8 中山北路三段51號前快、慢車道分隔島上</cms:CmsLocation>
+<cms:ContentPark>濱江市場 65,榮星花園 15</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P052</cms:CmsID>
+<cms:CmsLocation>RG4X8 建國北路一段75號前分隔島</cms:CmsLocation>
+<cms:ContentPark>建北橋下D區 1,建北橋下E區 滿場,建北橋下G區 滿場,建北橋下F區 滿場</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P053</cms:CmsID>
+<cms:CmsLocation>RG4X8 堤頂大道二段99號前快慢車道分隔島</cms:CmsLocation>
+<cms:ContentPark>濱江國中 16,西康   滿場</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P054</cms:CmsID>
+<cms:CmsLocation>RG4X8 內湖區內湖路1段西康公園前方道路及人行道</cms:CmsLocation>
+<cms:ContentPark>濱江國中 16,西康   滿場</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P055</cms:CmsID>
+<cms:CmsLocation>RG4X8 北安路535號對面人行道上</cms:CmsLocation>
+<cms:ContentPark>濱江國中 16</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P056</cms:CmsID>
+<cms:CmsLocation>RG4X8 樂群一路上，環山抽水站前花圃</cms:CmsLocation>
+<cms:ContentPark>濱江國中 16</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P057</cms:CmsID>
+<cms:CmsLocation>RG4X8中山北路二段50巷前快慢車道分隔島上</cms:CmsLocation>
+<cms:ContentPark>市民大道公中段 55,建成國中 100</cms:ContentPark>
+<cms:ContentMsg>建成公園地下停車場滿場，請勿前往。</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P058</cms:CmsID>
+<cms:CmsLocation>RG4X8中山北路五段460巷口北側處快慢車道分隔島</cms:CmsLocation>
+<cms:ContentPark>福林公園 59,蘭雅公園 21,士林一號廣場西側 54</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P059</cms:CmsID>
+<cms:CmsLocation>RG4X8基河路上承德公園地下室停車場出入口前15公尺</cms:CmsLocation>
+<cms:ContentPark>百齡高中 146,承德公園 33,前港公園 115</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P060</cms:CmsID>
+<cms:CmsLocation>RG4X8文林路730、732號對面人行道上</cms:CmsLocation>
+<cms:ContentPark>文昌國小 4,兒童新樂園 250</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P061</cms:CmsID>
+<cms:CmsLocation>RG4X8美國學校大門正對面分隔島上</cms:CmsLocation>
+<cms:ContentPark>振興公園 19,石牌國小 21,士林一號廣場西側 54</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P064</cms:CmsID>
+<cms:CmsLocation>RG4X8文林路16號後方中山北路南向快慢車道分隔島</cms:CmsLocation>
+<cms:ContentPark>百齡高中 146,兒童新樂園 250</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P065</cms:CmsID>
+<cms:CmsLocation>RG4X8承德路5段80號前中央分隔島上</cms:CmsLocation>
+<cms:ContentPark>兒童新樂園 251</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P066</cms:CmsID>
+<cms:CmsLocation>RG4X8 忠誠路173巷前人行道上</cms:CmsLocation>
+<cms:ContentPark>蘭雅公園 21,文昌國小 4,士林一號廣場西側 54</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P067</cms:CmsID>
+<cms:CmsLocation>RG4X8中山北路五段與劍潭路交會前60公尺北向中央分隔島上</cms:CmsLocation>
+<cms:ContentPark>百齡高中 146,承德公園 33,福林公園 59</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P068</cms:CmsID>
+<cms:CmsLocation>RG4X8 承德路4段122.124號前中央分隔島上北向</cms:CmsLocation>
+<cms:ContentPark>百齡高中 146,承德公園 33,前港公園 115,福林公園 59</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P069</cms:CmsID>
+<cms:CmsLocation>RG4X8 承德路4段150號前中央分隔島上南向</cms:CmsLocation>
+<cms:ContentPark>福林公園 59,前港公園 115,百齡高中 146</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P070</cms:CmsID>
+<cms:CmsLocation>RG4X8承德路4段242號前中央分隔島上南向</cms:CmsLocation>
+<cms:ContentPark>前港公園 115,百齡高中 146</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P071</cms:CmsID>
+<cms:CmsLocation>RG4X8酒泉街157號前人行道</cms:CmsLocation>
+<cms:ContentPark>海光公園 36</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P072</cms:CmsID>
+<cms:CmsLocation>RG4X8承德路二段109巷口北側人行道</cms:CmsLocation>
+<cms:ContentPark>成淵高中 滿場,蓬萊國小 68,花博公園   滿場</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P073</cms:CmsID>
+<cms:CmsLocation>RG4X8 忠孝東路4段98號前</cms:CmsLocation>
+<cms:ContentPark>僑安地下停車場 86,附中公園 8</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P074</cms:CmsID>
+<cms:CmsLocation>RG4X8重慶北路三段大橋國小前人行道</cms:CmsLocation>
+<cms:ContentPark>朝陽公園 滿場,蓬萊國小 68,啟聰學校 </cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P076</cms:CmsID>
+<cms:CmsLocation>RG4X8延平北路四段200號前人行道</cms:CmsLocation>
+<cms:ContentPark>啟聰學校 ,朝陽公園 滿場,花博公園 滿場</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P078</cms:CmsID>
+<cms:CmsLocation>RG4X8萬大路520、524號對面人行道</cms:CmsLocation>
+<cms:ContentPark>青年公園棒球場 96,青年公園高爾夫場 75,莒光立體 25,萬華車站 49</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P079</cms:CmsID>
+<cms:CmsLocation>RG4X8環河南路三段5號前快、慢車道分隔島</cms:CmsLocation>
+<cms:ContentPark>雙園國中 ,萬華國中 79,萬華車站 49,萬板地下 50</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P080</cms:CmsID>
+<cms:CmsLocation>RG4X8西藏路223、225號中央分隔島</cms:CmsLocation>
+<cms:ContentPark>雙園國中 ,萬華國中 79,萬華車站 49</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P081</cms:CmsID>
+<cms:CmsLocation>RG4X8西藏路502、504號中央分隔島</cms:CmsLocation>
+<cms:ContentPark>雙園國中 ,萬華車站 49,萬板地下 50</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P082</cms:CmsID>
+<cms:CmsLocation>RG4X8艋舺大道與大理街160巷23弄交會處中央分隔島</cms:CmsLocation>
+<cms:ContentPark>雙園國中 ,萬華車站 49,萬板地下 50</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P083</cms:CmsID>
+<cms:CmsLocation>RG8X3水源路187號右前方中央分隔島</cms:CmsLocation>
+<cms:ContentPark>青年公園高爾夫場 75,青年公園棒球場 96,古亭國中 51,萬華車站 49</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人請注意小心駕駛,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P084</cms:CmsID>
+<cms:CmsLocation>RG8X3環河南路二段198巷口前中央分隔島</cms:CmsLocation>
+<cms:ContentPark>艋舺公園 125,萬華車站 49</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人請注意小心駕駛,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P085</cms:CmsID>
+<cms:CmsLocation>RG4X8和平東路一段183巷前(分隔島上)</cms:CmsLocation>
+<cms:ContentPark>金華公園 74,大安森林公園 186</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P086</cms:CmsID>
+<cms:CmsLocation>RG4X8和平東路二段16巷前(分隔島上)</cms:CmsLocation>
+<cms:ContentPark>金華公園 73,大安森林公園 186</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P087</cms:CmsID>
+<cms:CmsLocation>RG4X8新生南路二段32號(金華國中)前</cms:CmsLocation>
+<cms:ContentPark>金華公園 74,大安森林公園 186</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P088</cms:CmsID>
+<cms:CmsLocation>RG4X8建國南路一段160號前(槽化島上)</cms:CmsLocation>
+<cms:ContentPark>大安森林公園 186,台北資訊園區 191</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P089</cms:CmsID>
+<cms:CmsLocation>RG4X8仁愛路三段(空總大門)前(分隔島上)</cms:CmsLocation>
+<cms:ContentPark>大安森林公園 186,青年局 6</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P090</cms:CmsID>
+<cms:CmsLocation>RG4X8建國南路一段304巷前(槽化島上)</cms:CmsLocation>
+<cms:ContentPark>大安森林公園 186,龍門國中 35,大安高工 133</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P091</cms:CmsID>
+<cms:CmsLocation>RG4X8建國南路二段193號前(槽化島上)</cms:CmsLocation>
+<cms:ContentPark>大安森林公園 186</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P092</cms:CmsID>
+<cms:CmsLocation>RG4X8辛亥路一段台大綜合體育館旁(人行道)</cms:CmsLocation>
+<cms:ContentPark>龍門國中 33,大安森林公園 186</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P094</cms:CmsID>
+<cms:CmsLocation>RG4X8基隆路二段188號前(人行道上)</cms:CmsLocation>
+<cms:ContentPark>大安森林公園 186,嘉興公園 滿場</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P095</cms:CmsID>
+<cms:CmsLocation>RG4X8復興南路一段372號前(人行道)</cms:CmsLocation>
+<cms:ContentPark>大安高工 133,大安森林公園 186</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P096</cms:CmsID>
+<cms:CmsLocation>RG4X8忠孝東路四段59號前</cms:CmsLocation>
+<cms:ContentPark>太平洋百貨忠孝店 51,太平洋百貨復興店 303,市民大道延吉段 19,市民大道敦延段 ,市民大道復敦段 50</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P097</cms:CmsID>
+<cms:CmsLocation>RG4X8仁愛路三段148號前(分隔島)</cms:CmsLocation>
+<cms:ContentPark>大安森林公園 186,附中公園 8</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P098</cms:CmsID>
+<cms:CmsLocation>RG4X8市民大道四段32、34號前中央分隔</cms:CmsLocation>
+<cms:ContentPark>市民大道復敦段   50,市民大道敦延段 ,市民大道延吉段 19</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P099</cms:CmsID>
+<cms:CmsLocation>RG4X8市民大道四段102、104號前中央分隔島</cms:CmsLocation>
+<cms:ContentPark>市民大道敦延段 ,偶戲博物館 6,市民大道延吉段 19,臺北文創 366</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P101</cms:CmsID>
+<cms:CmsLocation>RG4X8民權東路四段36號前(分隔島上)</cms:CmsLocation>
+<cms:ContentPark>榮星花園 15,松山機場第1號 滿場,松山機場第2號 5,民有市場 1,松山機場第3號 46</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P104</cms:CmsID>
+<cms:CmsLocation>RG4X8民生東路三段138號前(分隔島上)</cms:CmsLocation>
+<cms:ContentPark>民生活動中心 滿場,松山機場第1號 滿場,民生立體 164,松山機場第2號 5,健康國小 滿場,松山機場第3號 46</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P105</cms:CmsID>
+<cms:CmsLocation>RG4X8民生東路四段69號前(分隔島上)</cms:CmsLocation>
+<cms:ContentPark>民有市場 1,松山機場第1號 滿場,榮星花園 15,松山機場第2號 5,松山機場第3號 46</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P106</cms:CmsID>
+<cms:CmsLocation>RG4X8民生東路四段116號</cms:CmsLocation>
+<cms:ContentPark>民生立體 165,民生活動中心 滿場,健康國小 滿場,民權公園 70</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P107</cms:CmsID>
+<cms:CmsLocation>RG4X8民生東路五段224號前(分隔島)</cms:CmsLocation>
+<cms:ContentPark>民生活動中心 滿場,健康國小 滿場,民生立體 164,西松高中 69</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P108</cms:CmsID>
+<cms:CmsLocation>RG4X8塔悠路與寶清街105巷前</cms:CmsLocation>
+<cms:ContentPark>中崙高中 19,松山國小 74,雅祥公園 17,松山車站 55,八德立體 26</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P109</cms:CmsID>
+<cms:CmsLocation>RG4X8光復北路66號前(分隔島上)</cms:CmsLocation>
+<cms:ContentPark>八德立體 26,中崙高中 19,市民大道延吉段 19</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P110</cms:CmsID>
+<cms:CmsLocation>RG4X8光復南路45號前(分隔島上)</cms:CmsLocation>
+<cms:ContentPark>中崙高中 19,台北田徑場 滿場,八德立體 26</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P111</cms:CmsID>
+<cms:CmsLocation>RG4X8塔悠路214號前方中央分隔島上(北向)</cms:CmsLocation>
+<cms:ContentPark>西松高中 69,民生活動中心 滿場,健康國小 滿場,民生立體 165</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P112</cms:CmsID>
+<cms:CmsLocation>RG4X8市民大道五段175號前左方中央分隔島</cms:CmsLocation>
+<cms:ContentPark>八德立體 26,市民大道 延吉段 19,市民大道敦延段     ,松山高中 87</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P113</cms:CmsID>
+<cms:CmsLocation>RG4X8市民大道四段本線上與八德路三段12巷57弄交會處</cms:CmsLocation>
+<cms:ContentPark>市民大道敦延段 ,市民大道復敦段   50,市民大道建復段 5</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P114</cms:CmsID>
+<cms:CmsLocation>RG4X8市民大道四段本線上與敦化南路一段100巷3弄交會處</cms:CmsLocation>
+<cms:ContentPark>市民大道復敦段 50</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P115</cms:CmsID>
+<cms:CmsLocation>RG4X8市民大道三段161號前西南側中央分隔島</cms:CmsLocation>
+<cms:ContentPark>市民大道林金段  344,台北資訊園區 191,建北橋下O區 6,建北橋下A區 44</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P117</cms:CmsID>
+<cms:CmsLocation>RG4X8永吉路520、522號前(分島上)</cms:CmsLocation>
+<cms:ContentPark>中坡公園 65,成德立體 滿場,松山國小 74,北流音樂停車場 156,八德立體 26</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P118</cms:CmsID>
+<cms:CmsLocation>RG4X8忠孝東路五段春光公園前(人行道)</cms:CmsLocation>
+<cms:ContentPark>臺北流行音樂中心停車場 156,松山車站 55,松山國小 74,中坡公園 65,八德立體 26</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P119</cms:CmsID>
+<cms:CmsLocation>RG4X8光復南路417-1號(人行道)</cms:CmsLocation>
+<cms:ContentPark>僑安停車場 86</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P120</cms:CmsID>
+<cms:CmsLocation>RG4X8松仁路本線上與松勤路交會處前10公尺(人行道)</cms:CmsLocation>
+<cms:ContentPark>遠東百貨信義分公司停車場 226,忠信  58,松山工農 12</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P121</cms:CmsID>
+<cms:CmsLocation>RG4X8市民大道五段本線上與東寧路交會口前135公尺處</cms:CmsLocation>
+<cms:ContentPark>臺北文創 366,松山車站 55,松山高中 87</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P122</cms:CmsID>
+<cms:CmsLocation>RG4X8羅斯福路三段140巷前(人行道)</cms:CmsLocation>
+<cms:ContentPark>大安森林公園 186</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P123</cms:CmsID>
+<cms:CmsLocation>RG4X8重慶南路三段37號前(人行道上)</cms:CmsLocation>
+<cms:ContentPark>市民大道公中段 55,市民大道中林段 27,兩廳院  250</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P124</cms:CmsID>
+<cms:CmsLocation>RG4X8愛國西路2號前(人行道上)</cms:CmsLocation>
+<cms:ContentPark>兩廳院  250</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P125</cms:CmsID>
+<cms:CmsLocation>RG4X8金山南路二段52號旁(人行道上)</cms:CmsLocation>
+<cms:ContentPark>金華公園 73,大安森林公園 186,兩廳院 250</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P126</cms:CmsID>
+<cms:CmsLocation>RG4X8仁愛路一段51巷前(分隔島)</cms:CmsLocation>
+<cms:ContentPark>青年局 6</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P127</cms:CmsID>
+<cms:CmsLocation>RG4X8中山南路濟南教會前(分隔島)</cms:CmsLocation>
+<cms:ContentPark>市民大道中林段 27,塔城公園 滿場,市民大道公中段 55,市民大道塔城段 17</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P128</cms:CmsID>
+<cms:CmsLocation>RG4X8中山南路20號(中央圖書館)對面(快慢道分隔島</cms:CmsLocation>
+<cms:ContentPark>市民大道中林段   27,市民大道公中段 55</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P129</cms:CmsID>
+<cms:CmsLocation>RG4X8 鄭州路38巷交會處前中央分隔島</cms:CmsLocation>
+<cms:ContentPark>市民大道公中段  55,塔城公園 滿場,市民大道中林段 27,市民大道塔城段 17,洛陽立體     807,峨嵋立體 321</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P132</cms:CmsID>
+<cms:CmsLocation>RG4X8 重慶北路22號前分隔島上</cms:CmsLocation>
+<cms:ContentPark>塔城公園 滿場</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P133</cms:CmsID>
+<cms:CmsLocation>RG4X8 館前路與忠孝西路口東北角</cms:CmsLocation>
+<cms:ContentPark>市民大道公中段 55,台北車站Ｋ區 53,臺北車站西區 26</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人，機車13人，行人６人，請小心駕駛,北市優良暨資深典範駕駛5/1-6/30受理報名，請洽公、工會或本市公運處,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉,臺北市2025城鎮韌性（防空）演習訂於 7月17日13時30分至14時實施</cms:ContentMsg>
+</cms:CmsData>
+<cms:CmsData>
+<cms:CmsID>P136</cms:CmsID>
+<cms:CmsLocation>RG8X3林森北路260號人行道前</cms:CmsLocation>
+<cms:ContentPark>林森公園 158,市民大道林金段 344</cms:ContentPark>
+<cms:ContentMsg>無照駕駛機車，罰12,000元起，累犯加重處罰,本市 114年 1-5月交通事故死亡23人請注意小心駕駛,酒後騎腳踏車，罰款１２００至２４００,酒後騎腳踏車，也算酒駕。,左轉車應過中線再左轉</cms:ContentMsg>
+</cms:CmsData>
+</cms:CmsDataSet>
+</cms:ExchangeData>
+
+
+
+
