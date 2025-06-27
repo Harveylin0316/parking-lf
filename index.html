@@ -393,15 +393,20 @@
                             const infoWindow = new google.maps.InfoWindow({
                                 content: createInfoWindow(parkingLot, availability),
                                 maxWidth: 300,
-                                disableAutoPan: false, // 開啟自動平移
-                                pixelOffset: new google.maps.Size(0, -10) // 稍微向上偏移
+                                pixelOffset: new google.maps.Size(0, -10)
                             });
 
-                            marker.addListener('click', () => {
-                                // 關閉其他開啟的資訊視窗
+                            // 添加標記點擊事件
+                            marker.addListener('click', (e) => {
+                                // 阻止事件冒泡到地圖
+                                e.stop();
+                                
+                                // 關閉之前打開的資訊視窗
                                 if (currentInfoWindow) {
                                     currentInfoWindow.close();
                                 }
+                                
+                                // 打開新的資訊視窗
                                 infoWindow.open(map, marker);
                                 currentInfoWindow = infoWindow;
                             });
@@ -490,6 +495,14 @@
                 zoomControl: true, // 保留縮放控制按鈕
                 zoomControlOptions: {
                     position: google.maps.ControlPosition.RIGHT_BOTTOM
+                }
+            });
+
+            // 添加地圖點擊事件監聽器
+            map.addListener('click', () => {
+                if (currentInfoWindow) {
+                    currentInfoWindow.close();
+                    currentInfoWindow = null;
                 }
             });
 
