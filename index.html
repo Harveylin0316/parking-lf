@@ -174,16 +174,16 @@
 
         // 解析費率資訊
         function parseParkingFee(payex) {
-            if (!payex) return '無資料';
+            if (!payex) return '$0';
             
             // 嘗試匹配 "XX元/時" 或 "每小時XX元" 的模式
             const hourlyFeeMatch = payex.match(/(\d+)元\/(小)?時|每小時(\d+)元/);
             if (hourlyFeeMatch) {
                 const fee = hourlyFeeMatch[1] || hourlyFeeMatch[3];
-                return `${fee}元/時`;
+                return `$${fee}`;
             }
             
-            return '詳見說明';
+            return '$0';
         }
 
         // 計算兩點之間的距離（使用 Haversine 公式）
@@ -332,14 +332,19 @@
                                 position: { lat: parkLat, lng: parkLng },
                                 map: map,
                                 title: parkingLot.name,
-                                label: createMarkerLabel(parkingLot),
+                                label: {
+                                    text: parseParkingFee(parkingLot.payex),
+                                    color: "white",
+                                    fontSize: "16px",
+                                    fontWeight: "bold"
+                                },
                                 icon: {
                                     path: google.maps.SymbolPath.CIRCLE,
                                     fillColor: hasSpaces ? '#4CAF50' : '#f44336',
                                     fillOpacity: 0.9,
                                     strokeWeight: 2,
                                     strokeColor: '#ffffff',
-                                    scale: 15
+                                    scale: 20
                                 }
                             });
 
@@ -517,7 +522,7 @@
             map.setCenter(place.geometry.location);
             map.setZoom(17);
 
-            // 更新用戶位置標記
+            // 更新搜尋位置標記
             if (userMarker) {
                 userMarker.setMap(null);
             }
@@ -526,12 +531,12 @@
                 map: map,
                 title: "搜尋位置",
                 icon: {
-                    path: google.maps.SymbolPath.CIRCLE,
-                    fillColor: '#4285F4',
+                    path: google.maps.SymbolPath.MARKER,
+                    fillColor: '#FF0000',
                     fillOpacity: 1,
                     strokeWeight: 2,
-                    strokeColor: '#ffffff',
-                    scale: 12
+                    strokeColor: '#FFFFFF',
+                    scale: 15
                 }
             });
 
