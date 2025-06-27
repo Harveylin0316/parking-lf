@@ -433,7 +433,9 @@
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 16,
                 center: { lat: 25.0330, lng: 121.5654 }, // 暫時的中心點
-                gestureHandling: 'greedy' // 允許在移動設備上直接拖動地圖
+                gestureHandling: 'greedy', // 允許在移動設備上直接拖動地圖
+                mapTypeControl: false, // 隱藏地圖類型切換按鈕
+                mapTypeId: google.maps.MapTypeId.ROADMAP // 設置預設地圖類型為一般地圖
             });
 
             // 初始化搜尋框
