@@ -29,6 +29,9 @@
         const SEARCH_RADIUS = 1000; // 初始搜尋半徑（公尺）
         const MAX_SEARCH_RADIUS = 5000; // 最大搜尋半徑（公尺）
         const MIN_VISIBLE_PARKING_LOTS = 3; // 最少要顯示的停車場數量
+        let lastUpdatePosition = null;
+        const MIN_UPDATE_DISTANCE = 200; // 最小更新距離（公尺）
+        let updateTimeout = null;
 
         // 解析費率資訊
         function parseParkingFee(payex) {
@@ -67,42 +70,42 @@
         }
 
         // 開啟導航
-function startNavigation(lat, lng, name) {
-    const destination = `${lat},${lng}`;
-    
-    // 檢測設備類型
-    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        // iOS 設備：使用 comgooglemaps:// scheme
-        const iosUrl = `comgooglemaps://?daddr=${destination}&directionsmode=driving`;
-        const webUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`;
-        
-        // 嘗試打開 Google Maps App
-        window.location.href = iosUrl;
-        
-        // 如果 2 秒後還在同一頁面，說明沒有安裝 Google Maps，則打開網頁版
-        setTimeout(() => {
-            if (document.hidden !== true) {
-                window.location.href = webUrl;
+        function startNavigation(lat, lng, name) {
+            const destination = `${lat},${lng}`;
+            
+            // 檢測設備類型
+            if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                // iOS 設備：使用 comgooglemaps:// scheme
+                const iosUrl = `comgooglemaps://?daddr=${destination}&directionsmode=driving`;
+                const webUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`;
+                
+                // 嘗試打開 Google Maps App
+                window.location.href = iosUrl;
+                
+                // 如果 2 秒後還在同一頁面，說明沒有安裝 Google Maps，則打開網頁版
+                setTimeout(() => {
+                    if (document.hidden !== true) {
+                        window.location.href = webUrl;
+                    }
+                }, 2000);
+            } else if (/Android/i.test(navigator.userAgent)) {
+                // Android 設備：使用 google.navigation: scheme
+                const androidUrl = `google.navigation:q=${destination}&mode=d`;
+                const webUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`;
+                
+                // 嘗試打開 Google Maps App
+                window.location.href = androidUrl;
+                
+                // 如果 2 秒後還在同一頁面，說明沒有安裝 Google Maps，則打開網頁版
+                setTimeout(() => {
+                    if (document.hidden !== true) {
+                        window.location.href = webUrl;
+                    }
+                }, 2000);
+            } else {
+                // 桌面設備：在新窗口打開網頁版地圖
+                window.open(`https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`, '_blank');
             }
-        }, 2000);
-    } else if (/Android/i.test(navigator.userAgent)) {
-        // Android 設備：使用 google.navigation: scheme
-        const androidUrl = `google.navigation:q=${destination}&mode=d`;
-        const webUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`;
-        
-        // 嘗試打開 Google Maps App
-        window.location.href = androidUrl;
-        
-        // 如果 2 秒後還在同一頁面，說明沒有安裝 Google Maps，則打開網頁版
-        setTimeout(() => {
-            if (document.hidden !== true) {
-                window.location.href = webUrl;
-            }
-        }, 2000);
-    } else {
-        // 桌面設備：在新窗口打開網頁版地圖
-        window.open(`https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`, '_blank');
-    }
         }
 
         // 更新停車場資訊視窗內容
@@ -223,6 +226,40 @@ function startNavigation(lat, lng, name) {
                 nearbyLots
             };
         }
+
+        // 檢查是否需要更新
+        function shouldUpdate(newPosition) {
+            if (!lastUpdatePosition) return true;
+            
+            const distance = getDistance(
+                lastUpdatePosition.lat,
+                lastUpdatePosition.lng,
+                newPosition.lat,
+                newPosition.lng
+            );
+            
+            return distance >= MIN_UPDATE_DISTANCE;
+        }
+
+        // 防抖函數
+        function debounce(func, wait) {
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(updateTimeout);
+                    func(...args);
+                };
+                clearTimeout(updateTimeout);
+                updateTimeout = setTimeout(later, wait);
+            };
+        }
+
+        // 包裝更新函數
+        const debouncedUpdate = debounce((position) => {
+            if (shouldUpdate(position)) {
+                lastUpdatePosition = position;
+                updateNearbyParking(position);
+            }
+        }, 500);
 
         // 更新附近的停車場標記
         async function updateNearbyParking(position) {
@@ -396,17 +433,39 @@ function startNavigation(lat, lng, name) {
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 16,
                 center: { lat: 25.0330, lng: 121.5654 }, // 暫時的中心點
-                gestureHandling: 'greedy', // 允許在移動設備上直接拖動地圖
-                mapTypeControl: false, // 隱藏地圖類型切換按鈕
-                mapTypeId: google.maps.MapTypeId.ROADMAP, // 設置預設地圖類型為一般地圖
-                fullscreenControl: false, // 隱藏全螢幕控制按鈕
-                streetViewControl: false, // 隱藏街景控制按鈕
-                zoomControl: true, // 保留縮放控制按鈕
+                gestureHandling: 'greedy',
+                mapTypeControl: false,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                fullscreenControl: false,
+                streetViewControl: false,
+                zoomControl: true,
                 zoomControlOptions: {
                     position: google.maps.ControlPosition.RIGHT_BOTTOM
                 },
-                clickableIcons: false // 禁用預設地標的點擊，但保留顯示
+                clickableIcons: false,
+                // 隱藏 Google Maps 版權信息和其他控制元素
+                styles: [
+                    {
+                        featureType: "administrative",
+                        elementType: "geometry",
+                        stylers: [{ visibility: "off" }]
+                    }
+                ]
             });
+
+            // 隱藏版權信息和其他控制元素
+            const mapDiv = document.getElementById('map');
+            const style = document.createElement('style');
+            style.type = 'text/css';
+            style.innerHTML = `
+                .gmnoprint, .gm-style-cc, .gmnoscreen {
+                    display: none !important;
+                }
+                .gm-style a[href^="https://maps.google.com/maps"] {
+                    display: none !important;
+                }
+            `;
+            document.getElementsByTagName('head')[0].appendChild(style);
 
             // 添加地圖點擊事件監聽器
             map.addListener('click', () => {
@@ -423,7 +482,7 @@ function startNavigation(lat, lng, name) {
                     lat: center.lat(),
                     lng: center.lng()
                 };
-                updateNearbyParking(position);
+                debouncedUpdate(position);
             });
 
             // 添加地圖縮放結束事件監聽器
@@ -433,7 +492,7 @@ function startNavigation(lat, lng, name) {
                     lat: center.lat(),
                     lng: center.lng()
                 };
-                updateNearbyParking(position);
+                debouncedUpdate(position);
             });
 
             // 初始化搜尋框
