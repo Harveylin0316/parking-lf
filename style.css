@@ -35,21 +35,21 @@ body {
 }
 
 .search-button {
-    padding: 8px 16px;
-    background: #4285F4;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: #4285F4 !important;
+    color: white !important;
+    border: none !important;
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
 }
 
 .search-button:hover {
-    background: #357ABD;
+    background-color: #3367D6 !important;
 }
 
 .search-button:active {
@@ -226,43 +226,51 @@ body {
 .gmnoprint.gm-bundled-control > .gmnoprint > div,
 .gm-bundled-control,
 .gm-bundled-control-on-bottom,
-.gmnoprint > div[style*="background-color: rgb(255, 255, 255)"] {
+.gmnoprint > div[style*="background-color: rgb(255, 255, 255)"],
+div[draggable="false"][style*="background-color: rgb(255, 255, 255)"][style*="width: 40px"],
+div[style*="cursor: pointer"][style*="width: 40px"][style*="background-color: rgb(255, 255, 255)"],
+.gm-style-mtc,
+.gm-svpc,
+.gm-fullscreen-control {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    background: transparent !important;
 }
 
-/* 按鈕基本樣式 */
-.search-button,
+/* 移除所有地圖控制元素的背景和陰影 */
+.gmnoprint > div,
+.gmnoprint div[style*="background-color: rgb(255, 255, 255)"],
+.gm-style-cc,
+.gm-style > div[style*="position: absolute"] {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* 導航按鈕樣式 */
 .navigation-button {
-    padding: 8px 16px;
-    background: #4285F4;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: #4285F4 !important;
+    color: white !important;
+    border: none !important;
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    margin-top: 8px !important;
+    width: 100% !important;
 }
 
-.search-button:hover,
 .navigation-button:hover {
-    background: #357ABD;
-}
-
-.search-button:active,
-.navigation-button:active {
-    background: #2B6AA0;
-}
-
-.navigation-button {
-    width: 100%;
-    margin-top: 10px;
+    background-color: #3367D6 !important;
 }
 
 .navigation-button img {
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
+    width: 20px !important;
+    height: 20px !important;
+    margin-right: 8px !important;
 } 
