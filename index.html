@@ -18,6 +18,7 @@
 <body>
     <div id="map"></div>
 
+    <script src="config.js"></script>
     <script>
         function initMap() {
             const map = new google.maps.Map(document.getElementById('map'), {
@@ -54,7 +55,7 @@
         }
     </script>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMoPuAnekCjLyCB9G8ZG6OA2jshWaVq0s&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key="+config.GOOGLE_MAPS_API_KEY+"&callback=initMap">
     </script>
 </body>
 </html> 
