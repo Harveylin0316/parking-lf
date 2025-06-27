@@ -253,7 +253,7 @@ div[style*="cursor: pointer"][style*="width: 40px"][style*="background-color: rg
     color: white !important;
     border: none !important;
     padding: 10px 20px !important;
-    border-radius: 4px !important;
+    border-radius: 6px !important;
     cursor: pointer !important;
     display: inline-flex !important;
     align-items: center !important;
@@ -269,6 +269,9 @@ div[style*="cursor: pointer"][style*="width: 40px"][style*="background-color: rg
     -moz-appearance: none !important;
     appearance: none !important;
     line-height: 1.5 !important;
+    -webkit-tap-highlight-color: transparent !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
 }
 
 button.navigation-button {
@@ -278,6 +281,10 @@ button.navigation-button {
 
 .navigation-button:hover {
     background-color: #3367D6 !important;
+}
+
+.navigation-button:active {
+    background-color: #4285F4 !important;
 }
 
 .navigation-button img {
