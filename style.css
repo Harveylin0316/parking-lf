@@ -222,7 +222,11 @@ body {
 .gm-control-active[aria-label="Map camera controls"],
 .gm-control-active[aria-label="Zoom in"],
 .gm-control-active[aria-label="Zoom out"],
-.gmnoprint.gm-bundled-control.gm-bundled-control-on-bottom {
+.gmnoprint.gm-bundled-control,
+.gmnoprint.gm-bundled-control > .gmnoprint > div,
+.gm-bundled-control,
+.gm-bundled-control-on-bottom,
+.gmnoprint > div[style*="background-color: rgb(255, 255, 255)"] {
     display: none !important;
 }
 
