@@ -215,8 +215,10 @@ body {
     text-align: center;
 }
 
-/* 隱藏 Google Maps 相機控制按鈕 */
-.gm-control-active[aria-label="Map camera controls"] {
+/* 隱藏 Google Maps 控制按鈕 */
+.gm-control-active[aria-label="Map camera controls"],
+.gm-control-active[aria-label="Zoom in"],
+.gm-control-active[aria-label="Zoom out"] {
     display: none !important;
 }
 
