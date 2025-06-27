@@ -72,24 +72,23 @@
             const mapsUrl = `google.maps://dir/?api=1&destination=${destination}&travelmode=driving&dir_action=navigate`;
             const webUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`;
             
+            // 創建一個隱藏的 iframe
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+            
             // 檢測設備類型
-            if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                // iOS 設備
-                window.location.href = mapsUrl;
-                // 如果無法打開 App，則延遲後打開網頁版
+            if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+                // 移動設備：嘗試打開 Google Maps 應用
+                iframe.src = mapsUrl;
+                
+                // 移除 iframe
                 setTimeout(() => {
-                    window.location.href = webUrl;
-                }, 2000);
-            } else if (/Android/i.test(navigator.userAgent)) {
-                // Android 設備
-                window.location.href = mapsUrl;
-                // 如果無法打開 App，則延遲後打開網頁版
-                setTimeout(() => {
-                    window.location.href = webUrl;
-                }, 2000);
+                    document.body.removeChild(iframe);
+                }, 100);
             } else {
-                // 桌面設備直接打開網頁版
-                window.location.href = webUrl;
+                // 桌面設備：在新窗口打開網頁版地圖
+                window.open(webUrl, '_blank');
             }
         }
 
