@@ -687,13 +687,21 @@
                         pixelOffset: new google.maps.Size(0, -10)
                     });
 
-                    marker.addListener('click', (e) => {
-                        e.stop();
+                    marker.addListener('click', () => {
                         if (currentInfoWindow) {
                             currentInfoWindow.close();
+                            currentInfoWindow = null;
                         }
                         infoWindow.open(map, marker);
                         currentInfoWindow = infoWindow;
+                    });
+
+                    // 監聽地圖點擊事件來關閉資訊視窗
+                    map.addListener('click', () => {
+                        if (currentInfoWindow) {
+                            currentInfoWindow.close();
+                            currentInfoWindow = null;
+                        }
                     });
 
                     parkingMarkers.push(marker);
@@ -926,12 +934,17 @@
                 styles: [
                     {
                         featureType: 'poi',
-                        elementType: 'labels',
-                        stylers: [{ visibility: 'off' }] // 隱藏所有地標標籤
+                        elementType: 'labels.icon',
+                        stylers: [{ visibility: 'off' }] // 隱藏地標圖標
                     },
                     {
-                        featureType: 'poi.business',
-                        stylers: [{ visibility: 'off' }] // 隱藏商業地標
+                        featureType: 'poi',
+                        elementType: 'labels.text',
+                        stylers: [{ visibility: 'on' }] // 保持地標名稱可見
+                    },
+                    {
+                        featureType: 'poi',
+                        stylers: [{ clickable: false }] // 確保地標不可點擊
                     }
                 ]
             });
