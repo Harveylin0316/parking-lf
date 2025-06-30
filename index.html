@@ -1088,28 +1088,46 @@
             alert(errorMessage);
         }
 
-        // Load the API key
-        fetch('/.netlify/functions/get-maps-key')
-            .then(response => response.json())
-            .then(data => {
-                const apiKey = data.key;
-                const script = document.createElement('script');
+        // Load the API key with improved error handling
+        async function loadGoogleMapsAPI() {
+            try {
+                // Try Netlify function first
+                const response = await fetch("/.netlify/functions/get-maps-key");
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.key) {
+                        return data.key;
+                    }
+                }
+                throw new Error("Netlify function failed");
+            } catch (error) {
+                console.log("Netlify function not available, using local config:", error);
+                // Fallback to local config
+                if (typeof config !== "undefined" && config.GOOGLE_MAPS_API_KEY) {
+                    return config.GOOGLE_MAPS_API_KEY;
+                }
+                throw new Error("No API key available");
+            }
+        }
+
+        // Initialize Google Maps
+        loadGoogleMapsAPI()
+            .then(apiKey => {
+                console.log("Using API key:", apiKey ? "Found" : "Not found");
+                const script = document.createElement("script");
                 script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initMap`;
                 script.async = true;
                 script.defer = true;
+                script.onerror = function() {
+                    console.error("Failed to load Google Maps script");
+                    alert("無法載入地圖，請檢查網路連線或重新整理頁面");
+                };
                 document.body.appendChild(script);
             })
             .catch(error => {
-                console.error('Error loading API key:', error);
-                if (typeof config !== 'undefined' && config.GOOGLE_MAPS_API_KEY) {
-                    const script = document.createElement('script');
-                    script.src = `https://maps.googleapis.com/maps/api/js?key=${config.GOOGLE_MAPS_API_KEY}&libraries=places&callback=initMap`;
-                    script.async = true;
-                    script.defer = true;
-                    document.body.appendChild(script);
-                }
-            });
-    </script>
+                console.error("Error loading API key:", error);
+                alert("無法載入地圖設定，請重新整理頁面或聯絡管理員");
+            });    </script>
     <!-- Local development config -->
     <script src="config.js"></script>
 </body>
