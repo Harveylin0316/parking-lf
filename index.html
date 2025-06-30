@@ -946,7 +946,13 @@
                 styles: [
                     {
                         featureType: "poi",
-                        stylers: [{ visibility: "off" }]  // 完全隱藏所有地標
+                        elementType: "labels.icon",
+                        stylers: [{ visibility: "on" }]  // 顯示地標圖標
+                    },
+                    {
+                        featureType: "poi",
+                        elementType: "labels.text",
+                        stylers: [{ visibility: "on" }]  // 顯示地標文字
                     }
                 ]
             };
