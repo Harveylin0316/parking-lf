@@ -95,12 +95,13 @@
         let userMarker;
         let parkingMarkers = [];
         let searchBox;
-        let currentInfoWindow = null; // 追踪當前打開的資訊視窗
-        const SEARCH_RADIUS = 1000; // 初始搜尋半徑（公尺）
-        const MAX_SEARCH_RADIUS = 5000; // 最大搜尋半徑（公尺）
-        const MIN_VISIBLE_PARKING_LOTS = 3; // 最少要顯示的停車場數量
+        let currentInfoWindow = null;
+        let updateInterval; // 新增：用於存儲更新間隔的ID
+        const SEARCH_RADIUS = 1000;
+        const MAX_SEARCH_RADIUS = 5000;
+        const MIN_VISIBLE_PARKING_LOTS = 3;
         let lastUpdatePosition = null;
-        const MIN_UPDATE_DISTANCE = 200; // 最小更新距離（公尺）
+        const MIN_UPDATE_DISTANCE = 200;
         let updateTimeout = null;
 
         // 解析費率資訊
@@ -333,44 +334,93 @@
             }
         }, 500);
 
-        // 更新附近的停車場標記
+        // 新增：只獲取可用性數據的函數
+        async function fetchAvailabilityData() {
+            try {
+                const availResponse = await fetch('TCMSV_allavailable.json');
+                const availData = await availResponse.json();
+                return availData;
+            } catch (error) {
+                console.error('Error fetching availability data:', error);
+                return null;
+            }
+        }
+
+        // 新增：更新標記可用性的函數
+        async function updateMarkersAvailability() {
+            const availData = await fetchAvailabilityData();
+            if (!availData) return;
+
+            // 建立可用性查詢表
+            const availabilityMap = {};
+            availData.data.park.forEach(park => {
+                availabilityMap[park.id] = park;
+            });
+
+            // 更新每個現有標記
+            parkingMarkers.forEach(marker => {
+                const parkingLot = marker.parkingLot;
+                const availability = availabilityMap[parkingLot.id];
+                const hasSpaces = availability && availability.availablecar > 0;
+
+                // 更新標記圖標
+                marker.setIcon({
+                    path: google.maps.SymbolPath.CIRCLE,
+                    fillColor: hasSpaces ? '#4CAF50' : '#f44336',
+                    fillOpacity: 0.9,
+                    strokeWeight: 2,
+                    strokeColor: '#ffffff',
+                    scale: 20
+                });
+
+                // 如果資訊視窗是打開的，更新其內容
+                if (currentInfoWindow && currentInfoWindow.anchor === marker) {
+                    currentInfoWindow.setContent(createInfoWindow(parkingLot, availability));
+                }
+            });
+
+            // 如果停車場列表是可見的，更新列表
+            if (document.getElementById('parking-list').classList.contains('open')) {
+                const center = map.getCenter();
+                const position = {
+                    lat: center.lat(),
+                    lng: center.lng()
+                };
+                updateNearbyParking(position);
+            }
+        }
+
+        // 修改：更新附近停車場函數
         async function updateNearbyParking(position) {
             try {
-                // 獲取停車場資訊
                 const descResponse = await fetch('TCMSV_alldesc.json');
                 const descData = await descResponse.json();
                 
-                // 獲取即時車位資訊
                 const availResponse = await fetch('TCMSV_allavailable.json');
                 const availData = await availResponse.json();
 
-                // 清除現有標記
                 clearParkingMarkers();
 
                 const userLat = position.coords ? position.coords.latitude : position.lat;
                 const userLng = position.coords ? position.coords.longitude : position.lng;
 
-                // 計算最佳縮放級別和搜尋半徑
                 const { zoom, radius, nearbyLots } = calculateOptimalZoomAndRadius(position, descData.data.park);
 
-                // 更新地圖縮放級別
                 map.setZoom(zoom);
 
-                // 建立可用性查詢表
                 const availabilityMap = {};
                 availData.data.park.forEach(park => {
                     availabilityMap[park.id] = park;
                 });
 
-                // 儲存所有附近的停車場資訊以便排序
                 const nearbyParkingLots = [];
 
-                // 過濾並標記附近的停車場
                 nearbyLots.forEach(parkingLot => {
+                    if (!parkingLot.EntranceCoord?.EntrancecoordInfo?.[0]) return;
+                    
                     const parkLat = parseFloat(parkingLot.EntranceCoord.EntrancecoordInfo[0].Xcod);
                     const parkLng = parseFloat(parkingLot.EntranceCoord.EntrancecoordInfo[0].Ycod);
                     
-                    // 計算與使用者的距離
                     const distance = getDistance(userLat, userLng, parkLat, parkLng);
                     
                     const availability = availabilityMap[parkingLot.id];
@@ -383,7 +433,6 @@
                         position: { lat: parkLat, lng: parkLng }
                     });
                     
-                    // 創建標記
                     const marker = new google.maps.Marker({
                         position: { lat: parkLat, lng: parkLng },
                         map: map,
@@ -404,24 +453,20 @@
                         }
                     });
 
-                    // 添加資訊視窗
+                    // 在標記中存儲停車場數據
+                    marker.parkingLot = parkingLot;
+
                     const infoWindow = new google.maps.InfoWindow({
                         content: createInfoWindow(parkingLot, availability),
                         maxWidth: 300,
                         pixelOffset: new google.maps.Size(0, -10)
                     });
 
-                    // 添加標記點擊事件
                     marker.addListener('click', (e) => {
-                        // 阻止事件冒泡到地圖
                         e.stop();
-                        
-                        // 關閉之前打開的資訊視窗
                         if (currentInfoWindow) {
                             currentInfoWindow.close();
                         }
-                        
-                        // 打開新的資訊視窗
                         infoWindow.open(map, marker);
                         currentInfoWindow = infoWindow;
                     });
@@ -429,13 +474,9 @@
                     parkingMarkers.push(marker);
                 });
 
-                // 根據距離排序停車場
                 nearbyParkingLots.sort((a, b) => a.distance - b.distance);
-
-                // 更新停車場列表
                 updateParkingList(nearbyParkingLots);
 
-                // 如果沒有找到任何停車場，顯示提示訊息
                 if (nearbyParkingLots.length === 0) {
                     alert('附近沒有停車場，已擴大搜尋範圍');
                 }
@@ -501,10 +542,9 @@
         }
 
         function initMap() {
-            // 先創建地圖但不設置中心點
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 16,
-                center: { lat: 25.0330, lng: 121.5654 }, // 暫時的中心點
+                center: { lat: 25.0330, lng: 121.5654 },
                 gestureHandling: 'greedy',
                 mapTypeControl: false,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -515,7 +555,6 @@
                     position: google.maps.ControlPosition.RIGHT_BOTTOM
                 },
                 clickableIcons: false,
-                // 隱藏 Google Maps 版權信息和其他控制元素
                 styles: [
                     {
                         featureType: "administrative",
@@ -525,7 +564,6 @@
                 ]
             });
 
-            // 隱藏版權信息和其他控制元素
             const mapDiv = document.getElementById('map');
             const style = document.createElement('style');
             style.type = 'text/css';
@@ -539,7 +577,6 @@
             `;
             document.getElementsByTagName('head')[0].appendChild(style);
 
-            // 添加地圖點擊事件監聽器
             map.addListener('click', () => {
                 if (currentInfoWindow) {
                     currentInfoWindow.close();
@@ -547,7 +584,6 @@
                 }
             });
 
-            // 添加地圖拖動結束事件監聽器
             map.addListener('dragend', () => {
                 const center = map.getCenter();
                 const position = {
@@ -557,7 +593,6 @@
                 debouncedUpdate(position);
             });
 
-            // 添加地圖縮放結束事件監聽器
             map.addListener('zoom_changed', () => {
                 const center = map.getCenter();
                 const position = {
@@ -567,18 +602,15 @@
                 debouncedUpdate(position);
             });
 
-            // 初始化搜尋框
             const input = document.getElementById('search-input');
-            const searchBox = new google.maps.places.SearchBox(input);
+            searchBox = new google.maps.places.SearchBox(input);
 
-            // 將搜尋框限制在台北市範圍
             const taipeiBounds = new google.maps.LatLngBounds(
                 new google.maps.LatLng(25.0, 121.4),
                 new google.maps.LatLng(25.2, 121.7)
             );
             searchBox.setBounds(taipeiBounds);
 
-            // 監聽搜尋框的 Enter 鍵
             input.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
                     e.preventDefault();
@@ -586,7 +618,6 @@
                 }
             });
 
-            // 監聽搜尋結果
             searchBox.addListener('places_changed', () => {
                 const places = searchBox.getPlaces();
                 if (places.length === 0) {
@@ -595,7 +626,12 @@
                 handleSelectedPlace(places[0]);
             });
 
-            // 立即請求用戶位置並等待
+            // 開始定期更新
+            if (updateInterval) {
+                clearInterval(updateInterval);
+            }
+            updateInterval = setInterval(updateMarkersAvailability, 5 * 60 * 1000); // 每5分鐘更新一次
+
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
@@ -604,7 +640,6 @@
                             lng: position.coords.longitude,
                         };
 
-                        // 更新用戶位置標記
                         if (userMarker) {
                             userMarker.setMap(null);
                         }
@@ -622,11 +657,9 @@
                             }
                         });
 
-                        // 將地圖中心設為用戶位置
                         map.setCenter(pos);
                         map.setZoom(17);
 
-                        // 更新附近停車場資訊
                         updateNearbyParking(position);
                     },
                     (error) => {
@@ -702,11 +735,17 @@
             alert(errorMessage);
         }
 
+        // 新增：頁面卸載時清理
+        window.addEventListener('unload', () => {
+            if (updateInterval) {
+                clearInterval(updateInterval);
+            }
+        });
+
         // Load the API key
         fetch('/.netlify/functions/get-maps-key')
             .then(response => response.text())
             .then(apiKey => {
-                // Load Google Maps API with the key
                 const script = document.createElement('script');
                 script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initMap`;
                 script.async = true;
@@ -715,7 +754,6 @@
             })
             .catch(error => {
                 console.error('Error loading API key:', error);
-                // Fallback to local development
                 if (typeof config !== 'undefined' && config.GOOGLE_MAPS_API_KEY) {
                     const script = document.createElement('script');
                     script.src = `https://maps.googleapis.com/maps/api/js?key=${config.GOOGLE_MAPS_API_KEY}&libraries=places&callback=initMap`;
