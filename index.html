@@ -468,7 +468,7 @@
         // 新增：只獲取可用性數據的函數
         async function fetchAvailabilityData() {
             try {
-                const availResponse = await fetch('TCMSV_allavailable.json');
+                const availResponse = await fetch('https://tcgbusfs.blob.core.windows.net/blobtcmsv/TCMSV_allavailable.json');
                 const availData = await availResponse.json();
                 return availData;
             } catch (error) {
@@ -684,159 +684,61 @@
             }
         }
 
-        function initMap() {
+        // 初始化地圖
+        async function initMap() {
+            // 獲取 Google Maps API Key
+            const response = await fetch('/.netlify/functions/get-maps-key');
+            const data = await response.json();
+            const apiKey = data.key;
+
+            // 載入 Google Maps JavaScript API
+            await loadGoogleMapsAPI(apiKey);
+
+            // 創建地圖
             map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 16,
-                center: { lat: 25.0330, lng: 121.5654 },
-                gestureHandling: 'greedy',
-                mapTypeControl: false,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                fullscreenControl: false,
-                streetViewControl: false,
-                zoomControl: true,
-                zoomControlOptions: {
-                    position: google.maps.ControlPosition.RIGHT_BOTTOM
-                },
-                clickableIcons: false,
-                styles: [
-                    {
-                        featureType: "administrative",
-                        elementType: "geometry",
-                        stylers: [{ visibility: "off" }]
-                    }
-                ]
+                center: { lat: 25.0374865, lng: 121.5647688 },
+                zoom: 15
             });
 
-            const mapDiv = document.getElementById('map');
-            const style = document.createElement('style');
-            style.type = 'text/css';
-            style.innerHTML = `
-                .gmnoprint, .gm-style-cc, .gmnoscreen {
-                    display: none !important;
-                }
-                .gm-style a[href^="https://maps.google.com/maps"] {
-                    display: none !important;
-                }
-            `;
-            document.getElementsByTagName('head')[0].appendChild(style);
-
-            map.addListener('click', () => {
-                if (currentInfoWindow) {
-                    currentInfoWindow.close();
-                    currentInfoWindow = null;
-                }
-            });
-
-            // 使用一個變數追踪是否正在更新
-            let isUpdating = false;
-            
-            // 修改拖曳結束事件處理
-            map.addListener('dragend', () => {
-                if (isUpdating) return;
-                isUpdating = true;
-                
-                const center = map.getCenter();
-                const position = {
-                    lat: center.lat(),
-                    lng: center.lng()
-                };
-                
-                updateNearbyParking(position, false).finally(() => {
-                    isUpdating = false;
-                });
-            });
-
-            // 修改縮放事件處理
-            let zoomTimer;
-            map.addListener('zoom_changed', () => {
-                if (isUpdating) return;
-                clearTimeout(zoomTimer);
-                
-                zoomTimer = setTimeout(() => {
-                    isUpdating = true;
-                    const center = map.getCenter();
-                    const position = {
-                        lat: center.lat(),
-                        lng: center.lng()
-                    };
-                    updateNearbyParking(position, true).finally(() => {
-                        isUpdating = false;
-                    });
-                }, 500);
-            });
-
-            const input = document.getElementById('search-input');
-            searchBox = new google.maps.places.SearchBox(input);
-
-            const taipeiBounds = new google.maps.LatLngBounds(
-                new google.maps.LatLng(25.0, 121.4),
-                new google.maps.LatLng(25.2, 121.7)
-            );
-            searchBox.setBounds(taipeiBounds);
-
-            input.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    handleSearch();
-                }
-            });
-
-            searchBox.addListener('places_changed', () => {
-                const places = searchBox.getPlaces();
-                if (places.length === 0) {
-                    return;
-                }
-                handleSelectedPlace(places[0]);
-            });
-
-            // 開始定期更新
-            if (updateInterval) {
-                clearInterval(updateInterval);
-            }
-            updateInterval = setInterval(updateMarkersAvailability, 5 * 60 * 1000); // 每5分鐘更新一次
-
+            // 獲取用戶位置並更新地圖
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const pos = {
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude,
-                        };
-
-                        if (userMarker) {
-                            userMarker.setMap(null);
-                        }
-                        userMarker = new google.maps.Marker({
-                            position: pos,
-                            map: map,
-                            title: "你在這裡！",
-                            icon: {
-                                path: google.maps.SymbolPath.CIRCLE,
-                                fillColor: '#4285F4',
-                                fillOpacity: 1,
-                                strokeWeight: 2,
-                                strokeColor: '#ffffff',
-                                scale: 12
-                            }
-                        });
-
-                        map.setCenter(pos);
-                        map.setZoom(17);
-
-                        updateNearbyParking(position, false);
+                    async (position) => {
+                        await updateNearbyParking(position);
+                        // 設置定期更新
+                        setInterval(async () => {
+                            await updateMarkersAvailability();
+                        }, 180000); // 每3分鐘更新一次
                     },
                     (error) => {
-                        handleLocationError(error);
-                    },
-                    {
-                        enableHighAccuracy: true,
-                        timeout: 5000,
-                        maximumAge: 0
+                        console.error('Error getting user location:', error);
+                        updateNearbyParking({ lat: 25.0374865, lng: 121.5647688 });
                     }
                 );
             } else {
-                handleLocationError({ code: 'BROWSER_NOT_SUPPORTED' });
+                updateNearbyParking({ lat: 25.0374865, lng: 121.5647688 });
             }
+
+            // 監聽地圖縮放事件
+            map.addListener('zoom_changed', debounce(() => {
+                const center = map.getCenter();
+                updateNearbyParking({
+                    lat: center.lat(),
+                    lng: center.lng()
+                }, true);
+            }, 500));
+
+            // 監聽地圖拖曳事件
+            map.addListener('dragend', () => {
+                const center = map.getCenter();
+                updateNearbyParking({
+                    lat: center.lat(),
+                    lng: center.lng()
+                });
+            });
+
+            // 初始化停車場列表面板
+            initParkingListPanel();
         }
 
         function handleSelectedPlace(place) {
