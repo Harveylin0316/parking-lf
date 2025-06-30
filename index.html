@@ -404,29 +404,18 @@
                 
                 const distance = getDistance(userLat, userLng, coordinates.lat, coordinates.lng);
                 
-                // 檢查這個停車場是否已經顯示在地圖上
-                const isCurrentlyDisplayed = parkingMarkers.some(marker => {
-                    return marker.parkingLot.id === lot.id;
-                });
-
                 return {
                     lot,
                     distance,
-                    isCurrentlyDisplayed,
                     coordinates
                 };
             }).filter(item => item !== null);
 
-            // 先包含所有已顯示的停車場
-            let nearbyLots = candidateLots.filter(item => item.isCurrentlyDisplayed);
-
-            // 然後添加距離最近的停車場，直到達到上限
-            const newLots = candidateLots
-                .filter(item => !item.isCurrentlyDisplayed && item.distance <= baseRadius)
+            // 選擇距離最近的停車場
+            let nearbyLots = candidateLots
+                .filter(item => item.distance <= baseRadius)
                 .sort((a, b) => a.distance - b.distance)
-                .slice(0, Math.max(0, maxParkingLots - nearbyLots.length));
-
-            nearbyLots = nearbyLots.concat(newLots);
+                .slice(0, maxParkingLots);
 
             // 如果完全找不到停車場，逐步增加搜尋半徑
             if (nearbyLots.length === 0) {
@@ -588,17 +577,9 @@
                     availabilityMap[park.id] = park;
                 });
 
-                // 保存當前顯示的停車場ID
-                const currentDisplayedIds = new Set(parkingMarkers.map(marker => marker.parkingLot.id));
-                
-                // 清除不在新結果中的標記
-                parkingMarkers = parkingMarkers.filter(marker => {
-                    const shouldKeep = nearbyLots.some(lot => lot.id === marker.parkingLot.id);
-                    if (!shouldKeep) {
-                        marker.setMap(null);
-                    }
-                    return shouldKeep;
-                });
+                // 清除所有現有的停車場標記
+                parkingMarkers.forEach(marker => marker.setMap(null));
+                parkingMarkers = [];
 
                 const nearbyParkingLots = [];
 
@@ -611,47 +592,45 @@
                     const availability = availabilityMap[parkingLot.id];
                     const hasSpaces = availability && availability.availablecar > 0;
 
-                    // 只為新的停車場創建標記
-                    if (!currentDisplayedIds.has(parkingLot.id)) {
-                        const marker = new google.maps.Marker({
-                            position: coordinates,
-                            map: map,
-                            title: parkingLot.name,
-                            label: {
-                                text: parseParkingFee(parkingLot.payex),
-                                color: "white",
-                                fontSize: "16px",
-                                fontWeight: "bold"
-                            },
-                            icon: {
-                                path: google.maps.SymbolPath.CIRCLE,
-                                fillColor: hasSpaces ? '#4CAF50' : '#f44336',
-                                fillOpacity: 0.9,
-                                strokeWeight: 2,
-                                strokeColor: '#ffffff',
-                                scale: 20
-                            }
-                        });
+                    // 為每個停車場創建標記
+                    const marker = new google.maps.Marker({
+                        position: coordinates,
+                        map: map,
+                        title: parkingLot.name,
+                        label: {
+                            text: parseParkingFee(parkingLot.payex),
+                            color: "white",
+                            fontSize: "16px",
+                            fontWeight: "bold"
+                        },
+                        icon: {
+                            path: google.maps.SymbolPath.CIRCLE,
+                            fillColor: hasSpaces ? '#4CAF50' : '#f44336',
+                            fillOpacity: 0.9,
+                            strokeWeight: 2,
+                            strokeColor: '#ffffff',
+                            scale: 20
+                        }
+                    });
 
-                        marker.parkingLot = parkingLot;
+                    marker.parkingLot = parkingLot;
 
-                        const infoWindow = new google.maps.InfoWindow({
-                            content: createInfoWindow(parkingLot, availability),
-                            maxWidth: 300,
-                            pixelOffset: new google.maps.Size(0, -10)
-                        });
+                    const infoWindow = new google.maps.InfoWindow({
+                        content: createInfoWindow(parkingLot, availability),
+                        maxWidth: 300,
+                        pixelOffset: new google.maps.Size(0, -10)
+                    });
 
-                        marker.addListener('click', (e) => {
-                            e.stop();
-                            if (currentInfoWindow) {
-                                currentInfoWindow.close();
-                            }
-                            infoWindow.open(map, marker);
-                            currentInfoWindow = infoWindow;
-                        });
+                    marker.addListener('click', (e) => {
+                        e.stop();
+                        if (currentInfoWindow) {
+                            currentInfoWindow.close();
+                        }
+                        infoWindow.open(map, marker);
+                        currentInfoWindow = infoWindow;
+                    });
 
-                        parkingMarkers.push(marker);
-                    }
+                    parkingMarkers.push(marker);
 
                     nearbyParkingLots.push({
                         parkingLot,
@@ -844,14 +823,14 @@
                 }, true);
             }, 500));
 
-            // 監聽地圖拖曳事件
-            map.addListener('dragend', () => {
+            // 監聽地圖拖曳事件 - 使用防抖機制
+            map.addListener('dragend', debounce(() => {
                 const center = map.getCenter();
                 updateNearbyParking({
                     lat: center.lat(),
                     lng: center.lng()
-                });
-            });
+                }, false);
+            }, 300));
 
             // 初始化搜尋功能
             const input = document.getElementById('search-input');
