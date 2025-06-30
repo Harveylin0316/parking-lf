@@ -389,7 +389,11 @@
             
             const content = document.createElement('div');
             content.className = 'info-window';
-            content.innerHTML = `
+
+            // 防止資訊視窗點擊事件冒泡到地圖
+            content.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });            content.innerHTML = `
                 <div class="info-window-header">
                     <h3>${parkingLot.name}</h3>
                 </div>
@@ -888,6 +892,7 @@
             
             // 創建地圖，先以台北市中心為預設中心
             map = new google.maps.Map(document.getElementById('map'), {
+                clickableIcons: false, // 禁用預設地標點擊功能
                 center: { lat: 25.0374865, lng: 121.5647688 },
                 zoom: 15
             });
@@ -965,6 +970,13 @@
                 }, false);
             }, 300));
 
+            // 監聽地圖點擊事件 - 關閉資訊視窗
+            map.addListener('click', () => {
+                if (currentInfoWindow) {
+                    currentInfoWindow.close();
+                    currentInfoWindow = null;
+                }
+            });
             // 初始化搜尋功能
             const input = document.getElementById('search-input');
             searchBox = new google.maps.places.SearchBox(input);
