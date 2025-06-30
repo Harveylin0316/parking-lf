@@ -89,10 +89,6 @@
         <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0Ij48cGF0aCBkPSJNMTIgOGMtMi4yMSAwLTQgMS43OS00IDRzMS43OSA0IDQgNCA0LTEuNzkgNC00LTEuNzktNC00LTR6bTguOTQgM2MtLjQ2LTQuMTctMy43Ny03LjQ4LTcuOTQtNy45NFYxaC0ydjIuMDZDNi44MyAzLjUyIDMuNTIgNi44MyAzLjA2IDExSDFWMTNoMi4wNmMuNDYgNC4xNyAzLjc3IDcuNDggNy45NCA3Ljk0VjIzaDJ2LTIuMDZjNC4xNy0uNDYgNy40OC0zLjc3IDcuOTQtNy45NEgyM3YtMmgtMi4wNnpNMTIgMTljLTMuODcgMC03LTMuMTMtNy03czMuMTMtNyA3LTcgNyAzLjEzIDcgNy0zLjEzIDctNyA3eiIvPjwvc3ZnPg==" alt="定位圖標">
     </button>
     
-    <!-- LIFF 分享按鈕 -->
-    <button id="liff-share-button" class="liff-share-button" onclick="shareParkingInfo()" title="分享停車場資訊" style="display: none;">
-        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBmaWxsPSIjRkZGRkZGIj48cGF0aCBkPSJNMTggMTZjLS43NiAwLTEuNDQuMy0xLjk2Ljc3TDguOTEgMTIuN2MuMDUtLjIzLjA5LS40Ni4wOS0uN3MtLjA0LS40Ny0uMDktLjdsMy4wNS0xLjc1QzEyLjU2IDEwLjcgMTMuMjQgMTEgMTQgMTFzMS40NC0uMy0xLjk2LS43N2wuMDQtLjA0QzE1LjE2IDcuNjkgMTYuOTUgNiAxOSA2YzIuMjEgMCA0IDEuNzkgNCA0cy0xLjc5IDQtNCA0eiIvPjwvc3ZnPg==" alt="分享圖標">
-    </button>
     <div id="parking-list" class="parking-list">
         <div id="parking-items"></div>
     </div>
@@ -169,43 +165,9 @@
                     searchContainer.style.top = '20px'; // 稍微向下移動
                 }
 
-                // 顯示 LIFF 分享按鈕
-                const shareButton = document.getElementById('liff-share-button');
-                if (shareButton) {
-                    shareButton.style.display = 'flex';
-                }
             }
         }
 
-        // LIFF 分享功能
-        function shareParkingInfo() {
-            if (!isInLiffApp()) {
-                alert('分享功能只在 LINE 應用程式中可用');
-                return;
-            }
-
-            try {
-                const center = map.getCenter();
-                const appUrl = window.location.origin + window.location.pathname;
-                const shareUrl = `${appUrl}?lat=${center.lat()}&lng=${center.lng()}`;
-                
-                // 使用 LIFF 分享訊息
-                liff.shareTargetPicker([
-                    {
-                        type: 'text',
-                        text: `🅿️ 台北停車場地圖\n\n📍 查看這個位置附近的停車場：\n${shareUrl}\n\n💡 即時停車位資訊，找車位更輕鬆！`
-                    }
-                ]).then(() => {
-                    console.log('Share completed');
-                }).catch((error) => {
-                    console.error('Share failed:', error);
-                    alert('分享失敗，請稍後再試');
-                });
-            } catch (error) {
-                console.error('Share error:', error);
-                alert('分享功能暫時無法使用');
-            }
-        }
 
         // 判斷是否在 LIFF 環境中
         function isInLiffApp() {

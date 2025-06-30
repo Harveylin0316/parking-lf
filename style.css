@@ -209,32 +209,8 @@ body {
     height: 24px;
 }
 
-/* LIFF 分享按鈕樣式 */
-.liff-share-button {
-    position: fixed;
-    bottom: 70px; /* 位於我的位置按鈕上方 */
-    right: 20px;
-    z-index: 1001;
-    width: 40px;
-    height: 40px;
-    background: #00B900; /* LINE 綠色 */
-    border: none;
-    border-radius: 50%;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.liff-share-button:hover {
-    background: #009900;
-}
 
-.liff-share-button img {
-    width: 24px;
-    height: 24px;
-}
 
 .parking-item {
     padding: 15px;
