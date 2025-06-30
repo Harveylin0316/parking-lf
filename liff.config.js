@@ -10,7 +10,7 @@ const liffConfig = {
     
     // 生產環境 LIFF ID
     production: {
-        liffId: 'YOUR_PRODUCTION_LIFF_ID', // 請替換為生產環境的 LIFF ID
+        liffId: '2006491051-9B2k0Mqz', // 請替換為生產環境的 LIFF ID
         apiKey: '' // 如果需要特別的 API Key
     },
     
