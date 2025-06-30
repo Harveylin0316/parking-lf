@@ -82,6 +82,7 @@
     <div class="search-container">
         <input type="text" id="search-input" placeholder="你想去哪裡？">
         <button class="search-button" onclick="handleSearch()">搜尋</button>
+        <button class="clear-button" onclick="clearSearch()">清除</button>
     </div>
     <div id="map"></div>
     <button class="list-toggle" onclick="toggleParkingList()">顯示最近停車場</button>
@@ -382,7 +383,7 @@
 
         // 更新停車場資訊視窗內容
         function createInfoWindow(parkingLot, availability) {
-            const availableSpaces = availability ? availability.availablecar : '0';
+            const availableSpaces = availability ? Math.max(0, availability.availablecar) : 0;
             const status = availableSpaces > 0 ? '尚有空位' : '已滿';
             const statusClass = availableSpaces > 0 ? 'available' : 'full';
             const coordinates = getParkingLotCoordinates(parkingLot);
@@ -390,9 +391,12 @@
             const content = document.createElement('div');
             content.className = 'info-window';
 
-            // 防止資訊視窗點擊事件冒泡到地圖
+            // 防止導航按鈕等功能按鈕的點擊事件冒泡到地圖
             content.addEventListener('click', (e) => {
-                e.stopPropagation();
+                // 只在點擊按鈕時阻止冒泡，其他地方允許冒泡到地圖
+                if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
+                    e.stopPropagation();
+                }
             });            content.innerHTML = `
                 <div class="info-window-header">
                     <h3>${parkingLot.name}</h3>
@@ -426,7 +430,7 @@
 
             // 只顯示最近的3個停車場
             nearbyParkingLots.slice(0, 3).forEach(lot => {
-                const availableSpaces = lot.availability ? lot.availability.availablecar : '0';
+                const availableSpaces = lot.availability ? Math.max(0, lot.availability.availablecar) : 0;
                 const statusClass = availableSpaces > 0 ? 'available' : 'full';
                 
                 const item = document.createElement('div');
@@ -772,6 +776,28 @@
             }
         }
 
+        // 清除搜尋功能
+        function clearSearch() {
+            const input = document.getElementById('search-input');
+            input.value = '';
+            input.focus();
+            
+            // 如果有用戶標記，將地圖中心移回用戶位置
+            if (userMarker) {
+                map.setCenter(userMarker.getPosition());
+                map.setZoom(16);
+                
+                // 更新附近停車場
+                const userPos = userMarker.getPosition();
+                updateNearbyParking({
+                    coords: {
+                        latitude: userPos.lat(),
+                        longitude: userPos.lng()
+                    }
+                });
+            }
+        }
+
         // LIFF 位置獲取函數
         async function getLiffLocation() {
             if (!isLiffInitialized || !liff.isInClient()) {
@@ -893,8 +919,21 @@
             // 創建地圖，先以台北市中心為預設中心
             map = new google.maps.Map(document.getElementById('map'), {
                 clickableIcons: false, // 禁用預設地標點擊功能
+                disableDefaultUI: false, // 保持預設 UI 控制項
+                gestureHandling: 'greedy', // 改善觸控手勢
                 center: { lat: 25.0374865, lng: 121.5647688 },
-                zoom: 15
+                zoom: 15,
+                styles: [
+                    {
+                        featureType: 'poi',
+                        elementType: 'labels',
+                        stylers: [{ visibility: 'off' }] // 隱藏所有地標標籤
+                    },
+                    {
+                        featureType: 'poi.business',
+                        stylers: [{ visibility: 'off' }] // 隱藏商業地標
+                    }
+                ]
             });
 
             // 顯示載入提示

@@ -74,6 +74,29 @@ body {
     background: #2B6AA0;
 }
 
+.clear-button {
+    background-color: #f44336 !important;
+    color: white !important;
+    border: none !important;
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    margin-left: 5px !important;
+}
+
+.clear-button:hover {
+    background-color: #d32f2f !important;
+}
+
+.clear-button:active {
+    background: #c62828;
+}
+
 .pac-container {
     border-radius: 8px;
     margin-top: 5px;
