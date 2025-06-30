@@ -263,26 +263,40 @@
 
         // 計算最佳縮放級別和搜尋半徑
         function calculateOptimalZoomAndRadius(position, parkingLots, isUserZoom = false) {
-            let currentRadius = SEARCH_RADIUS;
-            let nearbyLots = [];
             const userLat = position.coords ? position.coords.latitude : position.lat;
             const userLng = position.coords ? position.coords.longitude : position.lng;
-
-            // 如果是用戶手動縮放，使用當前的縮放級別
             const currentZoom = map.getZoom();
             
-            // 根據縮放級別計算搜尋半徑（不論是否為用戶縮放）
-            currentRadius = Math.max(500, 5000 / Math.pow(2, currentZoom - 11));
-            
-            nearbyLots = parkingLots.filter(lot => {
+            // 改進搜尋半徑計算邏輯
+            let baseRadius;
+            if (currentZoom <= 12) {
+                baseRadius = 5000;
+            } else if (currentZoom <= 14) {
+                baseRadius = 3000;
+            } else if (currentZoom <= 16) {
+                baseRadius = 1500;
+            } else {
+                baseRadius = 1000;
+            }
+
+            // 確保已顯示的停車場不會消失
+            let currentRadius = baseRadius;
+            let nearbyLots = parkingLots.filter(lot => {
                 if (!lot.EntranceCoord?.EntrancecoordInfo?.[0]) return false;
                 const parkLat = parseFloat(lot.EntranceCoord.EntrancecoordInfo[0].Xcod);
                 const parkLng = parseFloat(lot.EntranceCoord.EntrancecoordInfo[0].Ycod);
                 const distance = getDistance(userLat, userLng, parkLat, parkLng);
-                return distance <= currentRadius;
+                
+                // 檢查這個停車場是否已經顯示在地圖上
+                const isCurrentlyDisplayed = parkingMarkers.some(marker => {
+                    return marker.parkingLot.id === lot.id;
+                });
+
+                // 如果停車場已經顯示，或者在基本搜尋半徑內，就包含它
+                return distance <= currentRadius || isCurrentlyDisplayed;
             });
 
-            // 如果找不到停車場，逐步增加搜尋半徑
+            // 如果完全找不到停車場，逐步增加搜尋半徑
             if (nearbyLots.length === 0) {
                 while (currentRadius <= MAX_SEARCH_RADIUS) {
                     currentRadius += 500;
@@ -404,8 +418,6 @@
                 const availResponse = await fetch('TCMSV_allavailable.json');
                 const availData = await availResponse.json();
 
-                clearParkingMarkers();
-
                 const userLat = position.coords ? position.coords.latitude : position.lat;
                 const userLng = position.coords ? position.coords.longitude : position.lng;
 
@@ -414,11 +426,24 @@
                 // 只在非用戶縮放且找不到停車場時調整縮放級別
                 if (!isUserZoom && nearbyLots.length === 0) {
                     map.setZoom(Math.max(map.getZoom() - 1, 11));
+                    return; // 縮放後會觸發新的更新，所以這裡直接返回
                 }
 
                 const availabilityMap = {};
                 availData.data.park.forEach(park => {
                     availabilityMap[park.id] = park;
+                });
+
+                // 保存當前顯示的停車場ID
+                const currentDisplayedIds = new Set(parkingMarkers.map(marker => marker.parkingLot.id));
+                
+                // 清除不在新結果中的標記
+                parkingMarkers = parkingMarkers.filter(marker => {
+                    const shouldKeep = nearbyLots.some(lot => lot.id === marker.parkingLot.id);
+                    if (!shouldKeep) {
+                        marker.setMap(null);
+                    }
+                    return shouldKeep;
                 });
 
                 const nearbyParkingLots = [];
@@ -434,51 +459,54 @@
                     const availability = availabilityMap[parkingLot.id];
                     const hasSpaces = availability && availability.availablecar > 0;
 
+                    // 只為新的停車場創建標記
+                    if (!currentDisplayedIds.has(parkingLot.id)) {
+                        const marker = new google.maps.Marker({
+                            position: { lat: parkLat, lng: parkLng },
+                            map: map,
+                            title: parkingLot.name,
+                            label: {
+                                text: parseParkingFee(parkingLot.payex),
+                                color: "white",
+                                fontSize: "16px",
+                                fontWeight: "bold"
+                            },
+                            icon: {
+                                path: google.maps.SymbolPath.CIRCLE,
+                                fillColor: hasSpaces ? '#4CAF50' : '#f44336',
+                                fillOpacity: 0.9,
+                                strokeWeight: 2,
+                                strokeColor: '#ffffff',
+                                scale: 20
+                            }
+                        });
+
+                        marker.parkingLot = parkingLot;
+
+                        const infoWindow = new google.maps.InfoWindow({
+                            content: createInfoWindow(parkingLot, availability),
+                            maxWidth: 300,
+                            pixelOffset: new google.maps.Size(0, -10)
+                        });
+
+                        marker.addListener('click', (e) => {
+                            e.stop();
+                            if (currentInfoWindow) {
+                                currentInfoWindow.close();
+                            }
+                            infoWindow.open(map, marker);
+                            currentInfoWindow = infoWindow;
+                        });
+
+                        parkingMarkers.push(marker);
+                    }
+
                     nearbyParkingLots.push({
                         parkingLot,
                         availability,
                         distance,
                         position: { lat: parkLat, lng: parkLng }
                     });
-                    
-                    const marker = new google.maps.Marker({
-                        position: { lat: parkLat, lng: parkLng },
-                        map: map,
-                        title: parkingLot.name,
-                        label: {
-                            text: parseParkingFee(parkingLot.payex),
-                            color: "white",
-                            fontSize: "16px",
-                            fontWeight: "bold"
-                        },
-                        icon: {
-                            path: google.maps.SymbolPath.CIRCLE,
-                            fillColor: hasSpaces ? '#4CAF50' : '#f44336',
-                            fillOpacity: 0.9,
-                            strokeWeight: 2,
-                            strokeColor: '#ffffff',
-                            scale: 20
-                        }
-                    });
-
-                    marker.parkingLot = parkingLot;
-
-                    const infoWindow = new google.maps.InfoWindow({
-                        content: createInfoWindow(parkingLot, availability),
-                        maxWidth: 300,
-                        pixelOffset: new google.maps.Size(0, -10)
-                    });
-
-                    marker.addListener('click', (e) => {
-                        e.stop();
-                        if (currentInfoWindow) {
-                            currentInfoWindow.close();
-                        }
-                        infoWindow.open(map, marker);
-                        currentInfoWindow = infoWindow;
-                    });
-
-                    parkingMarkers.push(marker);
                 });
 
                 nearbyParkingLots.sort((a, b) => a.distance - b.distance);
