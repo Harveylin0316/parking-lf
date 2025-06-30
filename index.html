@@ -96,12 +96,7 @@
         let parkingMarkers = [];
         let searchBox;
         let currentInfoWindow = null;
-        let updateInterval; // 新增：用於存儲更新間隔的ID
-        const SEARCH_RADIUS = 1000;
         const MAX_SEARCH_RADIUS = 5000;
-        const MIN_VISIBLE_PARKING_LOTS = 3;
-        let lastUpdatePosition = null;
-        const MIN_UPDATE_DISTANCE = 200;
         let updateTimeout = null;
 
         // 解析費率資訊
@@ -245,12 +240,6 @@
             return null;
         }
 
-        // 清除所有停車場標記
-        function clearParkingMarkers() {
-            parkingMarkers.forEach(marker => marker.setMap(null));
-            parkingMarkers = [];
-        }
-
         // 開啟導航
         function startNavigation(lat, lng, name) {
             const destination = `${lat},${lng}`;
@@ -323,16 +312,6 @@
             }
 
             return content;
-        }
-
-        function createMarkerLabel(parkingLot) {
-            const fee = parseParkingFee(parkingLot.payex);
-            return {
-                text: fee,
-                color: "white",
-                fontSize: "14px",
-                fontWeight: "bold"
-            };
         }
 
         // 更新停車場列表
@@ -436,20 +415,6 @@
             };
         }
 
-        // 檢查是否需要更新
-        function shouldUpdate(newPosition) {
-            if (!lastUpdatePosition) return true;
-            
-            const distance = getDistance(
-                lastUpdatePosition.lat,
-                lastUpdatePosition.lng,
-                newPosition.lat,
-                newPosition.lng
-            );
-            
-            return distance >= MIN_UPDATE_DISTANCE;
-        }
-
         // 防抖函數
         function debounce(func, wait) {
             return function executedFunction(...args) {
@@ -461,14 +426,6 @@
                 updateTimeout = setTimeout(later, wait);
             };
         }
-
-        // 包裝更新函數
-        const debouncedUpdate = debounce((position) => {
-            if (shouldUpdate(position)) {
-                lastUpdatePosition = position;
-                updateNearbyParking(position, false);
-            }
-        }, 500);
 
         // 新增：只獲取可用性數據的函數
         async function fetchAvailabilityData() {
@@ -916,13 +873,6 @@
             }
             alert(errorMessage);
         }
-
-        // 新增：頁面卸載時清理
-        window.addEventListener('unload', () => {
-            if (updateInterval) {
-                clearInterval(updateInterval);
-            }
-        });
 
         // Load the API key
         fetch('/.netlify/functions/get-maps-key')
