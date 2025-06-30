@@ -296,8 +296,6 @@
             const status = availableSpaces > 0 ? '尚有空位' : '已滿';
             const statusClass = availableSpaces > 0 ? 'available' : 'full';
             const coordinates = getParkingLotCoordinates(parkingLot);
-            const lat = coordinates.lat;
-            const lng = coordinates.lng;
             
             const content = document.createElement('div');
             content.className = 'info-window';
@@ -310,15 +308,19 @@
                 <p>剩餘車位：<span class="${statusClass}">${availableSpaces}</span></p>
                 <p>收費：${parseParkingFee(parkingLot.payex)}</p>
                 <p>營業時間：${parkingLot.serviceTime || '24小時'}</p>
-                <button class="navigation-button">
+                ${coordinates ? `<button class="navigation-button">
                     <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBmaWxsPSIjRkZGRkZGIj48cGF0aCBkPSJNMjEuNzEgMTEuMjlsLTktOS4wNzJjLS4zOS0uMzktMS4wMi0uMzktMS40MSAwbC05IDkuMDcyYy0uMzkuMzktLjM5IDEuMDIgMCAxLjQxbDkgOS4wNzFjLjM5LjM5IDEuMDIuMzkgMS40MSAwbDktOS4wNzFjLjM5LS4zOS4zOS0xLjAyIDAtMS40MXpNMTQgMTQuNThWMTJoLTR2M0g4di02aDZ2LTIuNThsNC41OSA0LjU5TDE0IDE0LjU4eiIvPjwvc3ZnPg==" alt="導航圖標">
                     開始導航
-                </button>
+                </button>` : ''}
             `;
 
             // 添加導航按鈕點擊事件
-            const navButton = content.querySelector('.navigation-button');
-            navButton.addEventListener('click', () => startNavigation(lat, lng, parkingLot.name));
+            if (coordinates) {
+                const navButton = content.querySelector('.navigation-button');
+                if (navButton) {
+                    navButton.addEventListener('click', () => startNavigation(coordinates.lat, coordinates.lng, parkingLot.name));
+                }
+            }
 
             return content;
         }
@@ -354,12 +356,11 @@
                 `;
                 
                 item.addEventListener('click', () => {
-                    const position = {
-                        lat: parseFloat(lot.parkingLot.EntranceCoord.EntrancecoordInfo[0].Xcod),
-                        lng: parseFloat(lot.parkingLot.EntranceCoord.EntrancecoordInfo[0].Ycod)
-                    };
-                    map.setCenter(position);
-                    map.setZoom(18);
+                    const coordinates = getParkingLotCoordinates(lot.parkingLot);
+                    if (coordinates) {
+                        map.setCenter(coordinates);
+                        map.setZoom(18);
+                    }
                 });
                 
                 listContainer.appendChild(item);
@@ -852,8 +853,33 @@
                 });
             });
 
-            // 初始化停車場列表面板
-            initParkingListPanel();
+            // 初始化搜尋功能
+            const input = document.getElementById('search-input');
+            searchBox = new google.maps.places.SearchBox(input);
+
+            // 設定搜尋範圍為台北市
+            const taipeiBounds = new google.maps.LatLngBounds(
+                new google.maps.LatLng(24.9, 121.4),
+                new google.maps.LatLng(25.3, 121.7)
+            );
+            searchBox.setBounds(taipeiBounds);
+
+            // 監聽搜尋框的 Enter 鍵
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleSearch();
+                }
+            });
+
+            // 監聽搜尋結果選擇
+            searchBox.addListener('places_changed', () => {
+                const places = searchBox.getPlaces();
+                if (places.length === 0) {
+                    return;
+                }
+                handleSelectedPlace(places[0]);
+            });
         }
 
         function handleSelectedPlace(place) {
