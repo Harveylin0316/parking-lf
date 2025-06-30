@@ -80,9 +80,15 @@
 </head>
 <body>
     <div class="search-container">
-        <input type="text" id="search-input" placeholder="你想去哪裡？">
+        <div class="search-input-wrapper">
+            <input type="text" id="search-input" placeholder="你想去哪裡？">
+            <button class="clear-button" onclick="clearSearch()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#FFFFFF">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
+            </button>
+        </div>
         <button class="search-button" onclick="handleSearch()">搜尋</button>
-        <button class="clear-button" onclick="clearSearch()">清除</button>
     </div>
     <div id="map"></div>
     <button class="list-toggle" onclick="toggleParkingList()">顯示最近停車場</button>
@@ -791,18 +797,24 @@
             input.focus();
             
             // 如果有用戶標記，將地圖中心移回用戶位置
-            if (userMarker) {
-                map.setCenter(userMarker.getPosition());
+            if (userMarker && userMarker.getPosition()) {
+                const userPos = userMarker.getPosition();
+                map.panTo(userPos);
                 map.setZoom(16);
                 
                 // 更新附近停車場
-                const userPos = userMarker.getPosition();
                 updateNearbyParking({
                     coords: {
                         latitude: userPos.lat(),
                         longitude: userPos.lng()
                     }
                 });
+            }
+
+            // 關閉當前開啟的資訊視窗
+            if (currentInfoWindow) {
+                currentInfoWindow.close();
+                currentInfoWindow = null;
             }
         }
 
@@ -925,28 +937,25 @@
             await initializeLiff();
             
             // 創建地圖，先以台北市中心為預設中心
-            map = new google.maps.Map(document.getElementById('map'), {
-                clickableIcons: false, // 禁用預設地標點擊功能
-                disableDefaultUI: false, // 保持預設 UI 控制項
-                gestureHandling: 'greedy', // 改善觸控手勢
+            const mapOptions = {
+                clickableIcons: false,
+                disableDefaultUI: false,
+                gestureHandling: 'greedy',
                 center: { lat: 25.0374865, lng: 121.5647688 },
                 zoom: 15,
                 styles: [
                     {
-                        featureType: 'poi',
-                        elementType: 'labels.icon',
-                        stylers: [{ visibility: 'off' }] // 隱藏地標圖標
-                    },
-                    {
-                        featureType: 'poi',
-                        elementType: 'labels.text',
-                        stylers: [{ visibility: 'on' }] // 保持地標名稱可見
-                    },
-                    {
-                        featureType: 'poi',
-                        stylers: [{ clickable: false }] // 確保地標不可點擊
+                        featureType: "poi",
+                        stylers: [{ visibility: "off" }]  // 完全隱藏所有地標
                     }
                 ]
+            };
+            
+            map = new google.maps.Map(document.getElementById('map'), mapOptions);
+            
+            // 確保在地圖載入後也禁用地標點擊
+            map.addListener('tilesloaded', () => {
+                map.setOptions({ clickableIcons: false });
             });
 
             // 顯示載入提示
@@ -1023,7 +1032,7 @@
             }, 300));
 
             // 監聽地圖點擊事件 - 關閉資訊視窗
-            map.addListener('click', () => {
+            google.maps.event.addListener(map, 'click', function() {
                 if (currentInfoWindow) {
                     currentInfoWindow.close();
                     currentInfoWindow = null;
