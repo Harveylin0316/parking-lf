@@ -134,6 +134,117 @@
             return R * c;
         }
 
+        // TWD97 to WGS84 座標轉換
+        function twd97_to_wgs84(x, y) {
+            const a = 6378137.0;
+            const b = 6356752.314245;
+            const lng0 = 121 * Math.PI / 180;
+            const k0 = 0.9999;
+            const dx = 250000;
+            const dy = 0;
+            const e = Math.sqrt((a * a - b * b) / (a * a));
+
+            x = parseFloat(x) - dx;
+            y = parseFloat(y) - dy;
+
+            // Calculate the meridian distance
+            let M = y / k0;
+
+            // Calculate footprint latitude
+            let mu = M / (a * (1.0 - Math.pow(e, 2) / 4.0 - 3 * Math.pow(e, 4) / 64.0 - 5 * Math.pow(e, 6) / 256.0));
+            let e1 = (1.0 - Math.sqrt(1.0 - Math.pow(e, 2))) / (1.0 + Math.sqrt(1.0 - Math.pow(e, 2)));
+
+            let J1 = (3 * e1 / 2 - 27 * Math.pow(e1, 3) / 32.0);
+            let J2 = (21 * Math.pow(e1, 2) / 16 - 55 * Math.pow(e1, 4) / 32.0);
+            let J3 = (151 * Math.pow(e1, 3) / 96.0);
+            let J4 = (1097 * Math.pow(e1, 4) / 512.0);
+
+            let fp = mu + J1 * Math.sin(2 * mu) + J2 * Math.sin(4 * mu) + J3 * Math.sin(6 * mu) + J4 * Math.sin(8 * mu);
+
+            // Calculate latitude and longitude
+            let e2 = Math.pow((e * a / b), 2);
+            let C1 = Math.pow(e2 * Math.cos(fp), 2);
+            let T1 = Math.pow(Math.tan(fp), 2);
+            let R1 = a * (1 - Math.pow(e, 2)) / Math.pow((1 - Math.pow(e, 2) * Math.pow(Math.sin(fp), 2)), (3.0 / 2.0));
+            let N1 = a / Math.sqrt(1 - Math.pow(e, 2) * Math.pow(Math.sin(fp), 2));
+
+            let D = x / (N1 * k0);
+
+            // 計算緯度
+            let Q1 = N1 * Math.tan(fp) / R1;
+            let Q2 = (Math.pow(D, 2) / 2.0);
+            let Q3 = (5 + 3 * T1 + 10 * C1 - 4 * Math.pow(C1, 2) - 9 * e2) * Math.pow(D, 4) / 24.0;
+            let Q4 = (61 + 90 * T1 + 298 * C1 + 45 * Math.pow(T1, 2) - 3 * Math.pow(C1, 2) - 252 * e2) * Math.pow(D, 6) / 720.0;
+            let lat = fp - Q1 * (Q2 - Q3 + Q4);
+
+            // 計算經度
+            let Q5 = D;
+            let Q6 = (1 + 2 * T1 + C1) * Math.pow(D, 3) / 6;
+            let Q7 = (5 - 2 * C1 + 28 * T1 - 3 * Math.pow(C1, 2) + 8 * e2 + 24 * Math.pow(T1, 2)) * Math.pow(D, 5) / 120.0;
+            let lng = lng0 + (Q5 - Q6 + Q7) / Math.cos(fp);
+
+            // 轉換為度
+            lat = (lat * 180) / Math.PI;
+            lng = (lng * 180) / Math.PI;
+
+            return { lat, lng };
+        }
+
+        // 檢查座標是否在台北市範圍內
+        function isCoordinateInTaipei(lat, lng) {
+            // 台北市的大致範圍
+            const TAIPEI_BOUNDS = {
+                minLat: 24.95,
+                maxLat: 25.21,
+                minLng: 121.45,
+                maxLng: 121.67
+            };
+            
+            return lat >= TAIPEI_BOUNDS.minLat && 
+                   lat <= TAIPEI_BOUNDS.maxLat && 
+                   lng >= TAIPEI_BOUNDS.minLng && 
+                   lng <= TAIPEI_BOUNDS.maxLng;
+        }
+
+        // 獲取停車場座標
+        function getParkingLotCoordinates(parkingLot) {
+            // 優先使用 TWD97 座標
+            if (parkingLot.tw97x && parkingLot.tw97y) {
+                return twd97_to_wgs84(parkingLot.tw97x, parkingLot.tw97y);
+            }
+            
+            // 如果沒有 TWD97 座標，才使用入口座標
+            if (parkingLot.EntranceCoord?.EntrancecoordInfo?.[0]) {
+                const entranceInfo = parkingLot.EntranceCoord.EntrancecoordInfo[0];
+                const xcod = parseFloat(entranceInfo.Xcod);
+                const ycod = parseFloat(entranceInfo.Ycod);
+                
+                // 預設 Xcod 是經度，Ycod 是緯度
+                let coords = {
+                    lat: ycod,
+                    lng: xcod
+                };
+                
+                // 檢查座標是否在台北市範圍內
+                if (!isCoordinateInTaipei(coords.lat, coords.lng)) {
+                    // 如果座標不在台北市範圍內，嘗試交換經緯度
+                    coords = {
+                        lat: xcod,
+                        lng: ycod
+                    };
+                    
+                    // 如果交換後還是不在台北市範圍內，這個入口座標可能有問題
+                    if (!isCoordinateInTaipei(coords.lat, coords.lng)) {
+                        return null;
+                    }
+                }
+                
+                return coords;
+            }
+            
+            return null;
+        }
+
         // 清除所有停車場標記
         function clearParkingMarkers() {
             parkingMarkers.forEach(marker => marker.setMap(null));
@@ -184,8 +295,9 @@
             const availableSpaces = availability ? availability.availablecar : '0';
             const status = availableSpaces > 0 ? '尚有空位' : '已滿';
             const statusClass = availableSpaces > 0 ? 'available' : 'full';
-            const lat = parkingLot.EntranceCoord.EntrancecoordInfo[0].Xcod;
-            const lng = parkingLot.EntranceCoord.EntrancecoordInfo[0].Ycod;
+            const coordinates = getParkingLotCoordinates(parkingLot);
+            const lat = coordinates.lat;
+            const lng = coordinates.lng;
             
             const content = document.createElement('div');
             content.className = 'info-window';
@@ -282,10 +394,10 @@
             // 確保已顯示的停車場不會消失
             let currentRadius = baseRadius;
             let nearbyLots = parkingLots.filter(lot => {
-                if (!lot.EntranceCoord?.EntrancecoordInfo?.[0]) return false;
-                const parkLat = parseFloat(lot.EntranceCoord.EntrancecoordInfo[0].Xcod);
-                const parkLng = parseFloat(lot.EntranceCoord.EntrancecoordInfo[0].Ycod);
-                const distance = getDistance(userLat, userLng, parkLat, parkLng);
+                const coordinates = getParkingLotCoordinates(lot);
+                if (!coordinates) return false;
+                
+                const distance = getDistance(userLat, userLng, coordinates.lat, coordinates.lng);
                 
                 // 檢查這個停車場是否已經顯示在地圖上
                 const isCurrentlyDisplayed = parkingMarkers.some(marker => {
@@ -301,10 +413,10 @@
                 while (currentRadius <= MAX_SEARCH_RADIUS) {
                     currentRadius += 500;
                     nearbyLots = parkingLots.filter(lot => {
-                        if (!lot.EntranceCoord?.EntrancecoordInfo?.[0]) return false;
-                        const parkLat = parseFloat(lot.EntranceCoord.EntrancecoordInfo[0].Xcod);
-                        const parkLng = parseFloat(lot.EntranceCoord.EntrancecoordInfo[0].Ycod);
-                        const distance = getDistance(userLat, userLng, parkLat, parkLng);
+                        const coordinates = getParkingLotCoordinates(lot);
+                        if (!coordinates) return false;
+                        
+                        const distance = getDistance(userLat, userLng, coordinates.lat, coordinates.lng);
                         return distance <= currentRadius;
                     });
                     
@@ -449,12 +561,10 @@
                 const nearbyParkingLots = [];
 
                 nearbyLots.forEach(parkingLot => {
-                    if (!parkingLot.EntranceCoord?.EntrancecoordInfo?.[0]) return;
+                    const coordinates = getParkingLotCoordinates(parkingLot);
+                    if (!coordinates) return;
                     
-                    const parkLat = parseFloat(parkingLot.EntranceCoord.EntrancecoordInfo[0].Xcod);
-                    const parkLng = parseFloat(parkingLot.EntranceCoord.EntrancecoordInfo[0].Ycod);
-                    
-                    const distance = getDistance(userLat, userLng, parkLat, parkLng);
+                    const distance = getDistance(userLat, userLng, coordinates.lat, coordinates.lng);
                     
                     const availability = availabilityMap[parkingLot.id];
                     const hasSpaces = availability && availability.availablecar > 0;
@@ -462,7 +572,7 @@
                     // 只為新的停車場創建標記
                     if (!currentDisplayedIds.has(parkingLot.id)) {
                         const marker = new google.maps.Marker({
-                            position: { lat: parkLat, lng: parkLng },
+                            position: coordinates,
                             map: map,
                             title: parkingLot.name,
                             label: {
@@ -505,7 +615,7 @@
                         parkingLot,
                         availability,
                         distance,
-                        position: { lat: parkLat, lng: parkLng }
+                        position: coordinates
                     });
                 });
 
