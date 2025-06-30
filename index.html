@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <script src="liff.config.js"></script>
     <style>
         /* ... existing styles ... */
         .navigation-button {
@@ -86,11 +88,130 @@
     <button class="my-location-button" onclick="goToMyLocation()" title="回到我的位置">
         <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0Ij48cGF0aCBkPSJNMTIgOGMtMi4yMSAwLTQgMS43OS00IDRzMS43OSA0IDQgNCA0LTEuNzkgNC00LTEuNzktNC00LTR6bTguOTQgM2MtLjQ2LTQuMTctMy43Ny03LjQ4LTcuOTQtNy45NFYxaC0ydjIuMDZDNi44MyAzLjUyIDMuNTIgNi44MyAzLjA2IDExSDFWMTNoMi4wNmMuNDYgNC4xNyAzLjc3IDcuNDggNy45NCA3Ljk0VjIzaDJ2LTIuMDZjNC4xNy0uNDYgNy40OC0zLjc3IDcuOTQtNy45NEgyM3YtMmgtMi4wNnpNMTIgMTljLTMuODcgMC03LTMuMTMtNy03czMuMTMtNyA3LTcgNyAzLjEzIDcgNy0zLjEzIDctNyA3eiIvPjwvc3ZnPg==" alt="定位圖標">
     </button>
+    
+    <!-- LIFF 分享按鈕 -->
+    <button id="liff-share-button" class="liff-share-button" onclick="shareParkingInfo()" title="分享停車場資訊" style="display: none;">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBmaWxsPSIjRkZGRkZGIj48cGF0aCBkPSJNMTggMTZjLS43NiAwLTEuNDQuMy0xLjk2Ljc3TDguOTEgMTIuN2MuMDUtLjIzLjA5LS40Ni4wOS0uN3MtLjA0LS40Ny0uMDktLjdsMy4wNS0xLjc1QzEyLjU2IDEwLjcgMTMuMjQgMTEgMTQgMTFzMS40NC0uMy0xLjk2LS43N2wuMDQtLjA0QzE1LjE2IDcuNjkgMTYuOTUgNiAxOSA2YzIuMjEgMCA0IDEuNzkgNCA0cy0xLjc5IDQtNCA0eiIvPjwvc3ZnPg==" alt="分享圖標">
+    </button>
     <div id="parking-list" class="parking-list">
         <div id="parking-items"></div>
     </div>
 
     <script>
+        // LIFF 初始化
+        let isLiffInitialized = false;
+        let liffProfile = null;
+
+        async function initializeLiff() {
+            try {
+                // 檢查是否在 LIFF 環境中
+                if (typeof liff !== 'undefined') {
+                    const config = getLiffConfig();
+                    
+                    await liff.init({ 
+                        liffId: config.liffId,
+                        withLoginOnExternalBrowser: true // 允許在外部瀏覽器登入
+                    });
+                    isLiffInitialized = true;
+                    
+                    console.log('LIFF initialized successfully');
+                    console.log('LIFF OS:', liff.getOS());
+                    console.log('LIFF Version:', liff.getVersion());
+                    console.log('Is in client:', liff.isInClient());
+                    console.log('Is logged in:', liff.isLoggedIn());
+                    
+                    // 如果用戶已登入，獲取用戶資訊
+                    if (liff.isLoggedIn()) {
+                        liffProfile = await liff.getProfile();
+                        console.log('LIFF user profile:', liffProfile);
+                        
+                        // 可選：顯示歡迎訊息
+                        showWelcomeMessage(liffProfile.displayName);
+                    }
+                    
+                    // 設置 LIFF 特定的 UI 調整
+                    adjustUIForLiff();
+                }
+            } catch (error) {
+                console.error('LIFF initialization failed:', error);
+                // 即使 LIFF 初始化失敗，app 仍應正常運作
+            }
+        }
+
+        // 顯示歡迎訊息
+        function showWelcomeMessage(displayName) {
+            const welcomeDiv = document.createElement('div');
+            welcomeDiv.innerHTML = `歡迎 ${displayName}！`;
+            welcomeDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #00B900;
+                color: white;
+                padding: 10px 20px;
+                border-radius: 5px;
+                z-index: 2000;
+                font-size: 14px;
+            `;
+            document.body.appendChild(welcomeDiv);
+            setTimeout(() => welcomeDiv.remove(), 3000);
+        }
+
+        // 針對 LIFF 環境調整 UI
+        function adjustUIForLiff() {
+            if (isInLiffApp()) {
+                document.body.classList.add('liff-app');
+                
+                // 可能需要調整搜尋框的位置，避免與 LINE 的標題列重疊
+                const searchContainer = document.querySelector('.search-container');
+                if (searchContainer) {
+                    searchContainer.style.top = '20px'; // 稍微向下移動
+                }
+
+                // 顯示 LIFF 分享按鈕
+                const shareButton = document.getElementById('liff-share-button');
+                if (shareButton) {
+                    shareButton.style.display = 'flex';
+                }
+            }
+        }
+
+        // LIFF 分享功能
+        function shareParkingInfo() {
+            if (!isInLiffApp()) {
+                alert('分享功能只在 LINE 應用程式中可用');
+                return;
+            }
+
+            try {
+                const center = map.getCenter();
+                const appUrl = window.location.origin + window.location.pathname;
+                const shareUrl = `${appUrl}?lat=${center.lat()}&lng=${center.lng()}`;
+                
+                // 使用 LIFF 分享訊息
+                liff.shareTargetPicker([
+                    {
+                        type: 'text',
+                        text: `🅿️ 台北停車場地圖\n\n📍 查看這個位置附近的停車場：\n${shareUrl}\n\n💡 即時停車位資訊，找車位更輕鬆！`
+                    }
+                ]).then(() => {
+                    console.log('Share completed');
+                }).catch((error) => {
+                    console.error('Share failed:', error);
+                    alert('分享失敗，請稍後再試');
+                });
+            } catch (error) {
+                console.error('Share error:', error);
+                alert('分享功能暫時無法使用');
+            }
+        }
+
+        // 判斷是否在 LIFF 環境中
+        function isInLiffApp() {
+            return typeof liff !== 'undefined' && liff.isInClient();
+        }
+
         let map;
         let userMarker;
         let parkingMarkers = [];
@@ -243,6 +364,24 @@
         // 開啟導航
         function startNavigation(lat, lng, name) {
             const destination = `${lat},${lng}`;
+            
+            // 如果在 LIFF 環境中，使用 LIFF 打開外部瀏覽器
+            if (isInLiffApp()) {
+                const webUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`;
+                
+                try {
+                    // 使用 LIFF 打開外部瀏覽器
+                    liff.openWindow({
+                        url: webUrl,
+                        external: true
+                    });
+                } catch (error) {
+                    console.error('LIFF openWindow failed:', error);
+                    // 如果 LIFF 失敗，回退到傳統方法
+                    window.open(webUrl, '_blank');
+                }
+                return;
+            }
             
             // 檢測設備類型
             if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
@@ -667,8 +806,124 @@
             }
         }
 
+        // LIFF 位置獲取函數
+        async function getLiffLocation() {
+            if (!isLiffInitialized || !liff.isInClient()) {
+                return null;
+            }
+            
+            try {
+                const position = await liff.getProfile(); // 這是示例，實際需要根據 LIFF API 調整
+                // LIFF 沒有直接的位置 API，這裡保留接口，未來可能會有
+                return null;
+            } catch (error) {
+                console.log('LIFF location not available:', error);
+                return null;
+            }
+        }
+
+        // 統一的位置獲取函數
+        async function getUserLocation(loadingDiv) {
+            // 優先嘗試 LIFF 位置服務（目前 LIFF 沒有位置 API，但保留接口）
+            const liffLocation = await getLiffLocation();
+            if (liffLocation) {
+                await handleLocationSuccess(liffLocation, loadingDiv);
+                return;
+            }
+
+            // 使用瀏覽器位置服務
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    async (position) => {
+                        await handleLocationSuccess(position, loadingDiv);
+                    },
+                    (error) => {
+                        handleLocationError(error, loadingDiv);
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 10000,
+                        maximumAge: 300000 // 5分鐘內的位置資訊可以重複使用
+                    }
+                );
+            } else {
+                handleLocationError({ code: 'BROWSER_NOT_SUPPORTED' }, loadingDiv);
+            }
+        }
+
+        // 位置獲取成功處理
+        async function handleLocationSuccess(position, loadingDiv) {
+            // 移除載入提示
+            loadingDiv.remove();
+            
+            // 設置用戶位置標記
+            const userPos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+
+            if (userMarker) {
+                userMarker.setMap(null);
+            }
+            userMarker = new google.maps.Marker({
+                position: userPos,
+                map: map,
+                title: "你在這裡！",
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    fillColor: '#4285F4',
+                    fillOpacity: 1,
+                    strokeWeight: 2,
+                    strokeColor: '#ffffff',
+                    scale: 12
+                }
+            });
+
+            // 以用戶位置為中心
+            map.setCenter(userPos);
+            map.setZoom(16);
+            
+            // 更新附近停車場
+            await updateNearbyParking(position);
+            
+            // 設置定期更新
+            setInterval(async () => {
+                await updateMarkersAvailability();
+            }, 180000); // 每3分鐘更新一次
+        }
+
+        // 位置獲取失敗處理
+        function handleLocationError(error, loadingDiv) {
+            // 移除載入提示
+            loadingDiv.remove();
+            console.error('Error getting user location:', error);
+            
+            // 如果無法獲取用戶位置，使用預設位置
+            updateNearbyParking({ lat: 25.0374865, lng: 121.5647688 });
+            
+            // 顯示錯誤提示
+            const errorDiv = document.createElement('div');
+            errorDiv.innerHTML = '無法獲取位置，顯示台北市區停車場';
+            errorDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #ff9800;
+                color: white;
+                padding: 10px 20px;
+                border-radius: 5px;
+                z-index: 1000;
+            `;
+            document.body.appendChild(errorDiv);
+            setTimeout(() => errorDiv.remove(), 3000);
+        }
+
         // 初始化地圖
-        function initMap() {
+        async function initMap() {
+            // 先初始化 LIFF
+            await initializeLiff();
+            
             // 創建地圖，先以台北市中心為預設中心
             map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: 25.0374865, lng: 121.5647688 },
@@ -693,82 +948,41 @@
             `;
             document.body.appendChild(loadingDiv);
 
-            // 獲取用戶位置並更新地圖
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    async (position) => {
-                        // 移除載入提示
-                        loadingDiv.remove();
-                        
-                        // 設置用戶位置標記
-                        const userPos = {
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude
-                        };
-
-                        if (userMarker) {
-                            userMarker.setMap(null);
-                        }
-                        userMarker = new google.maps.Marker({
-                            position: userPos,
-                            map: map,
-                            title: "你在這裡！",
-                            icon: {
-                                path: google.maps.SymbolPath.CIRCLE,
-                                fillColor: '#4285F4',
-                                fillOpacity: 1,
-                                strokeWeight: 2,
-                                strokeColor: '#ffffff',
-                                scale: 12
-                            }
-                        });
-
-                        // 以用戶位置為中心
-                        map.setCenter(userPos);
-                        map.setZoom(16);
-                        
-                        // 更新附近停車場
-                        await updateNearbyParking(position);
-                        
-                        // 設置定期更新
-                        setInterval(async () => {
-                            await updateMarkersAvailability();
-                        }, 180000); // 每3分鐘更新一次
-                    },
-                    (error) => {
-                        // 移除載入提示
-                        loadingDiv.remove();
-                        console.error('Error getting user location:', error);
-                        
-                        // 如果無法獲取用戶位置，使用預設位置
-                        updateNearbyParking({ lat: 25.0374865, lng: 121.5647688 });
-                        
-                        // 顯示錯誤提示
-                        const errorDiv = document.createElement('div');
-                        errorDiv.innerHTML = '無法獲取位置，顯示台北市區停車場';
-                        errorDiv.style.cssText = `
-                            position: fixed;
-                            top: 20px;
-                            left: 50%;
-                            transform: translateX(-50%);
-                            background: #ff9800;
-                            color: white;
-                            padding: 10px 20px;
-                            border-radius: 5px;
-                            z-index: 1000;
-                        `;
-                        document.body.appendChild(errorDiv);
-                        setTimeout(() => errorDiv.remove(), 3000);
-                    },
-                    {
-                        enableHighAccuracy: true,
-                        timeout: 10000,
-                        maximumAge: 300000 // 5分鐘內的位置資訊可以重複使用
+            // 檢查是否有分享的位置參數
+            const urlParams = new URLSearchParams(window.location.search);
+            const sharedLat = urlParams.get('lat');
+            const sharedLng = urlParams.get('lng');
+            
+            if (sharedLat && sharedLng) {
+                // 如果有分享的位置，直接使用該位置
+                const sharedPosition = {
+                    coords: {
+                        latitude: parseFloat(sharedLat),
+                        longitude: parseFloat(sharedLng)
                     }
-                );
+                };
+                await handleLocationSuccess(sharedPosition, loadingDiv);
+                
+                // 顯示分享提示
+                const shareNotice = document.createElement('div');
+                shareNotice.innerHTML = '📍 顯示朋友分享的位置';
+                shareNotice.style.cssText = `
+                    position: fixed;
+                    top: 70px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #00B900;
+                    color: white;
+                    padding: 8px 16px;
+                    border-radius: 20px;
+                    z-index: 2000;
+                    font-size: 14px;
+                `;
+                document.body.appendChild(shareNotice);
+                setTimeout(() => shareNotice.remove(), 4000);
             } else {
-                loadingDiv.remove();
-                updateNearbyParking({ lat: 25.0374865, lng: 121.5647688 });
+                // 獲取用戶位置
+                await getUserLocation(loadingDiv);
             }
 
             // 監聽地圖縮放事件

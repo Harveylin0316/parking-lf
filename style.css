@@ -6,6 +6,24 @@
 body {
     margin: 0;
     padding: 0;
+    /* LIFF 環境適配 */
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+/* LIFF 環境特定樣式 */
+.liff-app {
+    /* 針對 LIFF 環境的特殊樣式 */
+}
+
+.liff-header {
+    background: #00B900;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    display: none; /* 預設隱藏，只在需要時顯示 */
 }
 
 .search-container {
@@ -187,6 +205,33 @@ body {
 }
 
 .my-location-button img {
+    width: 24px;
+    height: 24px;
+}
+
+/* LIFF 分享按鈕樣式 */
+.liff-share-button {
+    position: fixed;
+    bottom: 70px; /* 位於我的位置按鈕上方 */
+    right: 20px;
+    z-index: 1001;
+    width: 40px;
+    height: 40px;
+    background: #00B900; /* LINE 綠色 */
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.liff-share-button:hover {
+    background: #009900;
+}
+
+.liff-share-button img {
     width: 24px;
     height: 24px;
 }
