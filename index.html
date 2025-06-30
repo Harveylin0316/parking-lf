@@ -270,46 +270,36 @@
 
             // 如果是用戶手動縮放，使用當前的縮放級別
             const currentZoom = map.getZoom();
-            if (isUserZoom) {
-                // 根據當前縮放級別計算搜尋半徑
-                currentRadius = Math.max(500, 5000 / Math.pow(2, currentZoom - 11));
-                
-                nearbyLots = parkingLots.filter(lot => {
-                    if (!lot.EntranceCoord?.EntrancecoordInfo?.[0]) return false;
-                    const parkLat = parseFloat(lot.EntranceCoord.EntrancecoordInfo[0].Xcod);
-                    const parkLng = parseFloat(lot.EntranceCoord.EntrancecoordInfo[0].Ycod);
-                    const distance = getDistance(userLat, userLng, parkLat, parkLng);
-                    return distance <= currentRadius;
-                });
+            
+            // 根據縮放級別計算搜尋半徑（不論是否為用戶縮放）
+            currentRadius = Math.max(500, 5000 / Math.pow(2, currentZoom - 11));
+            
+            nearbyLots = parkingLots.filter(lot => {
+                if (!lot.EntranceCoord?.EntrancecoordInfo?.[0]) return false;
+                const parkLat = parseFloat(lot.EntranceCoord.EntrancecoordInfo[0].Xcod);
+                const parkLng = parseFloat(lot.EntranceCoord.EntrancecoordInfo[0].Ycod);
+                const distance = getDistance(userLat, userLng, parkLat, parkLng);
+                return distance <= currentRadius;
+            });
 
-                return {
-                    zoom: currentZoom,
-                    radius: currentRadius,
-                    nearbyLots
-                };
-            }
-
-            // 自動調整模式
-            while (currentRadius <= MAX_SEARCH_RADIUS) {
-                nearbyLots = parkingLots.filter(lot => {
-                    if (!lot.EntranceCoord?.EntrancecoordInfo?.[0]) return false;
-                    const parkLat = parseFloat(lot.EntranceCoord.EntrancecoordInfo[0].Xcod);
-                    const parkLng = parseFloat(lot.EntranceCoord.EntrancecoordInfo[0].Ycod);
-                    const distance = getDistance(userLat, userLng, parkLat, parkLng);
-                    return distance <= currentRadius;
-                });
-
-                if (nearbyLots.length >= MIN_VISIBLE_PARKING_LOTS) {
-                    break;
+            // 如果找不到停車場，逐步增加搜尋半徑
+            if (nearbyLots.length === 0) {
+                while (currentRadius <= MAX_SEARCH_RADIUS) {
+                    currentRadius += 500;
+                    nearbyLots = parkingLots.filter(lot => {
+                        if (!lot.EntranceCoord?.EntrancecoordInfo?.[0]) return false;
+                        const parkLat = parseFloat(lot.EntranceCoord.EntrancecoordInfo[0].Xcod);
+                        const parkLng = parseFloat(lot.EntranceCoord.EntrancecoordInfo[0].Ycod);
+                        const distance = getDistance(userLat, userLng, parkLat, parkLng);
+                        return distance <= currentRadius;
+                    });
+                    
+                    if (nearbyLots.length > 0) break;
                 }
-                currentRadius += 500;
             }
-
-            // 計算適當的縮放級別
-            const zoom = Math.max(16 - Math.floor(currentRadius / 1000), 11);
 
             return {
-                zoom,
+                zoom: currentZoom,
                 radius: currentRadius,
                 nearbyLots
             };
@@ -421,9 +411,9 @@
 
                 const { zoom, radius, nearbyLots } = calculateOptimalZoomAndRadius(position, descData.data.park, isUserZoom);
 
-                // 只在非用戶縮放時設置縮放級別
-                if (!isUserZoom) {
-                    map.setZoom(zoom);
+                // 只在非用戶縮放且找不到停車場時調整縮放級別
+                if (!isUserZoom && nearbyLots.length === 0) {
+                    map.setZoom(Math.max(map.getZoom() - 1, 11));
                 }
 
                 const availabilityMap = {};
@@ -471,7 +461,6 @@
                         }
                     });
 
-                    // 在標記中存儲停車場數據
                     marker.parkingLot = parkingLot;
 
                     const infoWindow = new google.maps.InfoWindow({
@@ -495,7 +484,8 @@
                 nearbyParkingLots.sort((a, b) => a.distance - b.distance);
                 updateParkingList(nearbyParkingLots);
 
-                if (nearbyParkingLots.length === 0) {
+                // 只在真的找不到停車場時才顯示提示
+                if (nearbyParkingLots.length === 0 && radius >= MAX_SEARCH_RADIUS) {
                     alert('附近沒有停車場，已擴大搜尋範圍');
                 }
             } catch (error) {
@@ -599,27 +589,41 @@
                 }
             });
 
+            // 使用一個變數追踪是否正在更新
+            let isUpdating = false;
+            
+            // 修改拖曳結束事件處理
             map.addListener('dragend', () => {
+                if (isUpdating) return;
+                isUpdating = true;
+                
                 const center = map.getCenter();
                 const position = {
                     lat: center.lat(),
                     lng: center.lng()
                 };
-                debouncedUpdate(position);
+                
+                updateNearbyParking(position, false).finally(() => {
+                    isUpdating = false;
+                });
             });
 
-            // 移除 zoom_changed 事件的自動更新
-            // 只在用戶完成縮放後更新一次
+            // 修改縮放事件處理
             let zoomTimer;
             map.addListener('zoom_changed', () => {
+                if (isUpdating) return;
                 clearTimeout(zoomTimer);
+                
                 zoomTimer = setTimeout(() => {
+                    isUpdating = true;
                     const center = map.getCenter();
                     const position = {
                         lat: center.lat(),
                         lng: center.lng()
                     };
-                    updateNearbyParking(position, true); // 傳入 true 表示是由用戶縮放觸發
+                    updateNearbyParking(position, true).finally(() => {
+                        isUpdating = false;
+                    });
                 }, 500);
             });
 
