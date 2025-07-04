@@ -659,6 +659,10 @@
                     const coordinates = getParkingLotCoordinates(parkingLot);
                     if (!coordinates) return;
                     
+                    // 檢查停車費用，如果為0則跳過
+                    const parkingFee = parseParkingFee(parkingLot.payex);
+                    if (parkingFee === "0") return;
+                    
                     const distance = getDistance(userLat, userLng, coordinates.lat, coordinates.lng);
                     
                     const availability = availabilityMap[parkingLot.id];
